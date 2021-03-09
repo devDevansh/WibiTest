@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "303994532157",
+    "project_id": "wibi-50b77",
+    "storage_bucket": "wibi-50b77.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:303994532157:android:2e0b94dd6702767e8e1554",
+        "android_client_info": {
+          "package_name": "com.example.WIBI"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "303994532157-vp7frudq5ng6eg4l437i3vfgi63msl2c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.WIBI",
+            "certificate_hash": "6247767d4a34ceb6cec3f3b04b51c9d25db30846"
+          }
+        },
+        {
+          "client_id": "303994532157-mudtm2mnvca9qf8uek3mp2lc6t2rj4q1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCX08DYBApJqNdbyqNIYBxqnO_hUUdY12M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "303994532157-mudtm2mnvca9qf8uek3mp2lc6t2rj4q1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
