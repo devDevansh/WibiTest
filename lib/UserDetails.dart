@@ -1,13 +1,13 @@
-import 'package:flutter/material.dart';
+//import 'package:flutter/material.dart';
 
-class UserDetails {
+class UserDetail {
   String name;
   String email;
   String designation;
   String location;
   String contact;
 
-  UserDetails(String name, String email, String designation, String location,
+  UserDetail(String name, String email, String designation, String location,
       String contact) {
     this.name = name;
     this.email = email;

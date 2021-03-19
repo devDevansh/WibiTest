@@ -1,9 +1,13 @@
-import 'package:WIBI/variables.dart';
+//import 'package:WIBI/admin/admin_screen.dart';
+import 'package:WIBI/login/invalid_login.dart';
+import 'package:WIBI/profile/profile_screen.dart';
+import 'package:WIBI/sell/sellproduct.dart';
+//import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import '../catelements.dart';
-import '../dummy.dart';
+
+//import '../catelements.dart';
+//import '../dummy.dart';
 import './enums.dart';
 //import '../LoginScreen.dart';
 
@@ -14,11 +18,11 @@ class CustomBottomNavBar extends StatelessWidget {
   }) : super(key: key);
 
   final MenuState selectedMenu;
-  final GoogleSignIn _gSignIn = GoogleSignIn();
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 14),
+      padding: EdgeInsets.only(top: 13, bottom: 10),
       decoration: BoxDecoration(
         color: Color(0xFF1264D1),
         boxShadow: [
@@ -29,8 +33,8 @@ class CustomBottomNavBar extends StatelessWidget {
           ),
         ],
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(50),
-          topRight: Radius.circular(50),
+          topLeft: Radius.circular(63),
+          topRight: Radius.circular(63),
         ),
       ),
       child: SafeArea(
@@ -50,19 +54,21 @@ class CustomBottomNavBar extends StatelessWidget {
                       height: 28.5,
                     ),
                     onPressed: () {
-                      _gSignIn.signOut();
-                      print('Signed out');
-                      if (popValid) {
-                        Navigator.pop(context);
-                      } else {
-                        Navigator.pop(context);
-                        Navigator.pop(context);
-                      }
+                      Navigator.push(
+                        context,
+                        new MaterialPageRoute(
+                          builder: (context) => Hello(),
+                        ),
+                      );
                     },
                   ),
                   Text(
                     "Home",
-                    style: TextStyle(color: Colors.white, fontSize: 9),
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 9,
+                      fontWeight: FontWeight.bold,
+                    ),
                   )
                 ],
               ),
@@ -80,14 +86,20 @@ class CustomBottomNavBar extends StatelessWidget {
                     ),
                     onPressed: () {
                       Navigator.push(
-                          context,
-                          new MaterialPageRoute(
-                              builder: (context) => DummyPage()));
+                        context,
+                        new MaterialPageRoute(
+                          builder: (context) => SellPage(),
+                        ),
+                      );
                     },
                   ),
                   Text(
                     "Sell",
-                    style: TextStyle(color: Colors.white, fontSize: 9),
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 9,
+                      fontWeight: FontWeight.bold,
+                    ),
                   )
                 ],
               ),
@@ -106,8 +118,12 @@ class CustomBottomNavBar extends StatelessWidget {
                     onPressed: () {},
                   ),
                   Text(
-                    "Chat",
-                    style: TextStyle(color: Colors.white, fontSize: 9),
+                    "Slack",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 9,
+                      fontWeight: FontWeight.bold,
+                    ),
                   )
                 ],
               ),
@@ -123,11 +139,22 @@ class CustomBottomNavBar extends StatelessWidget {
                       width: 28.5,
                       height: 28.5,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        new MaterialPageRoute(
+                          builder: (context) => ProfileScreen(),
+                        ),
+                      );
+                    },
                   ),
                   Text(
                     "Profile",
-                    style: TextStyle(color: Colors.white, fontSize: 9),
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 9,
+                      fontWeight: FontWeight.bold,
+                    ),
                   )
                 ],
               ),

@@ -33,7 +33,7 @@ class IconBtnWithCounter extends StatelessWidget {
             ),
             child: SvgPicture.asset(
               svgSrc,
-              color: Color(0xFF2A2D36),
+              color: Color(0xFF263238),
               height: 10,
               width: 10,
             ),
