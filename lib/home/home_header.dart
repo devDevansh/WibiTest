@@ -1,14 +1,14 @@
 import 'package:WIBI/components/icon_btn_with_counter.dart';
 
 import 'package:WIBI/filters/filterspage.dart';
-//import 'package:WIBI/wishlist/components/WishlistCard.dart';
-//import 'package:WIBI/wishlist/components/body.dart';
+import 'package:WIBI/notification/notification_screen.dart';
+
 import 'package:WIBI/wishlist/wishlist_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:WIBI/components/size_config.dart';
 
-import 'search_field.dart';
+import 'search_box.dart';
 
 class HomeHeader extends StatelessWidget {
   const HomeHeader({
@@ -39,7 +39,7 @@ class HomeHeader extends StatelessWidget {
             padding: EdgeInsets.only(
               right: getProportionateScreenWidth(5),
             ),
-            child: SearchField(),
+            child: SearchBox(),
           ),
         ),
         Padding(
@@ -77,7 +77,14 @@ class HomeHeader extends StatelessWidget {
           child: IconBtnWithCounter(
             svgSrc: "assets/icons/bell.svg",
             numOfitem: 3,
-            press: () {},
+            press: () {
+              Navigator.push(
+                context,
+                new MaterialPageRoute(
+                  builder: (context) => NotificationScreen(),
+                ),
+              );
+            },
           ),
         ),
       ],

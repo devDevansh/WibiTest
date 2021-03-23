@@ -1,4 +1,5 @@
 import 'package:WIBI/admin/account_page.dart/accountpage.dart';
+import 'package:WIBI/admin/analytics.dart/charts.dart';
 import 'package:WIBI/admin/category_page.dart/categorypage.dart';
 import 'package:WIBI/admin/product_page.dart/productpage.dart';
 import 'package:WIBI/components/size_config.dart';
@@ -58,7 +59,14 @@ class Body extends StatelessWidget {
           AdminMenu(
             text: "Analytics",
             icon: "assets/images/analytics.svg",
-            press: () {},
+            press: () {
+              Navigator.push(
+                context,
+                new MaterialPageRoute(
+                  builder: (context) => AnalyticsPage(),
+                ),
+              );
+            },
           ),
         ],
       ),

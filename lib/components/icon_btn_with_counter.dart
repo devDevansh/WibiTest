@@ -21,7 +21,7 @@ class IconBtnWithCounter extends StatelessWidget {
       borderRadius: BorderRadius.circular(100),
       onTap: press,
       child: Stack(
-        overflow: Overflow.visible,
+        clipBehavior: Clip.none,
         children: [
           Container(
             padding: EdgeInsets.all(getProportionateScreenWidth(12)),
@@ -33,7 +33,7 @@ class IconBtnWithCounter extends StatelessWidget {
             ),
             child: SvgPicture.asset(
               svgSrc,
-              color: Color(0xFF263238),
+              color: Color(0xFF342E37),
               height: 10,
               width: 10,
             ),

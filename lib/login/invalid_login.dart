@@ -78,6 +78,7 @@ class Hello extends StatelessWidget {
                           ),
                         ],
                       ),
+                      // ignore: deprecated_member_use
                       child: RaisedButton(
                         splashColor: Colors.white,
                         color: Color(0xFF1264D1),

@@ -1,11 +1,8 @@
 import 'package:WIBI/components/constants.dart';
 import 'package:WIBI/components/size_config.dart';
-
 import 'package:flutter/material.dart';
-
 import 'dart:async';
 import 'package:WIBI/details/components/ProductClass.dart';
-
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -22,12 +19,12 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-  Future<List<Wishlist>> _getProduct() async {
-    var proData = await http.get("http://10.0.2.2:8080/wishlists");
+  Future<List<Notifications>> _getProduct() async {
+    var proData = await http.get("http://10.0.2.2:8080/notification");
     var jsonData = json.decode(proData.body);
-    List<Wishlist> products = [];
+    List<Notifications> products = [];
     for (var prod in jsonData) {
-      Wishlist product = Wishlist(
+      Notifications product = Notifications(
         prod["id"],
         prod["title"],
         prod["category"],
@@ -81,8 +78,8 @@ class _BodyState extends State<Body> {
                       direction: DismissDirection.endToStart,
                       onDismissed: (direction) {
                         /*   setState(() {
-                                      products.removeAt(snapshot.data[index]);
-                                    }); */
+                               products.removeAt(snapshot.data[index]);
+                             }); */
                       },
                       background: Container(
                         padding: EdgeInsets.symmetric(horizontal: 35),
@@ -156,7 +153,7 @@ class _BodyState extends State<Body> {
                                       Container(
                                         width: getProportionateScreenWidth(170),
                                         child: Text(
-                                          snapshot.data[index].title,
+                                          "Hurray! a new product was added.",
                                           overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
                                               color: Color(0xFF342E37),
@@ -165,11 +162,16 @@ class _BodyState extends State<Body> {
                                         ),
                                       ),
                                       SizedBox(height: 10),
-                                      Text(
-                                        "\u{20B9}\u{0020}${snapshot.data[index].price}",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w600,
-                                          color: Color(0xFF342E37),
+                                      Container(
+                                        width: getProportionateScreenWidth(170),
+                                        child: Text(
+                                          snapshot.data[index].title,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                              color: Color(0xFF342E37),
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w600),
+                                          maxLines: 1,
                                         ),
                                       ),
                                     ],
@@ -200,7 +202,7 @@ class _BodyState extends State<Body> {
   }
 }
 
-class Wishlist {
+class Notifications {
   final String id;
   final String title;
   final String category;
@@ -210,7 +212,7 @@ class Wishlist {
   final int price;
   //final String description;
 
-  Wishlist(
+  Notifications(
     this.id,
     this.title,
     this.category,

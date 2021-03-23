@@ -1,21 +1,23 @@
 import 'dart:convert';
+//import 'package:WIBI/UserDetails.dart';
+import 'package:WIBI/UserDetails.dart';
+import 'package:WIBI/admin/account_page.dart/accountpage.dart';
+import 'package:WIBI/admin/account_page.dart/add_account/add_account_design.dart';
 import 'package:WIBI/home/home_screen.dart';
-import 'package:WIBI/login/LoginScreen.dart';
 
-import '../UserDetails.dart';
 //import '../home_screen.dart';
 //import './home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-import 'UserCredentials_design.dart';
+
 //import 'UserDetail.dart';
 
-class FormPage extends StatefulWidget {
+class AddAccount extends StatefulWidget {
   @override
-  _FormPageState createState() => _FormPageState();
+  _AddAccountState createState() => _AddAccountState();
 }
 
-class _FormPageState extends State<FormPage> {
+class _AddAccountState extends State<AddAccount> {
   final myController1 = TextEditingController();
   final myController2 = TextEditingController();
   final myController3 = TextEditingController();
@@ -93,12 +95,12 @@ class _FormPageState extends State<FormPage> {
           ),
           onPressed: () {
             Navigator.push(context,
-                new MaterialPageRoute(builder: (context) => LoginScreen()));
+                new MaterialPageRoute(builder: (context) => ManageAccounts()));
           },
         ),
         centerTitle: true,
         title: Text(
-          "Sign Up",
+          "Add Account",
         ),
         backgroundColor: Color(0xFF1264D1),
       ),
@@ -142,9 +144,8 @@ class _FormPageState extends State<FormPage> {
                     backgroundColor: Color(0xFF1264D1),
                     radius: 60,
                     child: Container(
-                      alignment: Alignment(0.4, 0.15),
                       child: Image.asset(
-                        'assets/images/details.png',
+                        'assets/images/add.png',
                         height: 75,
                         width: 75,
                         fit: BoxFit.scaleDown,
@@ -177,7 +178,7 @@ class _FormPageState extends State<FormPage> {
                     decoration:
                         buildInputDecoration(Icons.person_rounded, 'Name'),
                     validator: (String value) {
-                      // this is the validation part that is displayed on the bottom of the text feild
+                      // this is the validation part that is displayed on the bottom of the text field
                       if (value.isEmpty) {
                         return 'Please enter your name!';
                       } else if (value.length < 3) {

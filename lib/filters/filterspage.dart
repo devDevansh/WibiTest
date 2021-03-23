@@ -39,6 +39,7 @@ class FilterPage extends StatelessWidget {
           SafeArea(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              // ignore: deprecated_member_use
               child: FlatButton(
                 height: 80,
                 padding: EdgeInsets.only(
@@ -60,7 +61,7 @@ class FilterPage extends StatelessWidget {
                   children: [
                     SvgPicture.asset(
                       "assets/images/category.svg",
-                      color: Color(0xFF263238),
+                      color: Color(0xFF342E37),
                       width: 40,
                     ),
                     SizedBox(width: 15),
@@ -75,7 +76,7 @@ class FilterPage extends StatelessWidget {
                     Icon(
                       Icons.arrow_right_rounded,
                       size: 40,
-                      color: Color(0xFF263238),
+                      color: Color(0xFF342E37),
                     ),
                   ],
                 ),
@@ -86,6 +87,7 @@ class FilterPage extends StatelessWidget {
           SafeArea(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              // ignore: deprecated_member_use
               child: FlatButton(
                 height: 80,
                 padding: EdgeInsets.only(
@@ -105,7 +107,7 @@ class FilterPage extends StatelessWidget {
                   children: [
                     SvgPicture.asset(
                       "assets/images/date.svg",
-                      color: Color(0xFF263238),
+                      color: Color(0xFF342E37),
                       width: 40,
                     ),
                     SizedBox(width: 15),
@@ -120,7 +122,7 @@ class FilterPage extends StatelessWidget {
                     Icon(
                       Icons.arrow_right_rounded,
                       size: 40,
-                      color: Color(0xFF263238),
+                      color: Color(0xFF342E37),
                     ),
                   ],
                 ),
@@ -131,6 +133,7 @@ class FilterPage extends StatelessWidget {
           SafeArea(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              // ignore: deprecated_member_use
               child: FlatButton(
                 height: 80,
                 padding: EdgeInsets.only(
@@ -150,7 +153,7 @@ class FilterPage extends StatelessWidget {
                   children: [
                     SvgPicture.asset(
                       "assets/images/price.svg",
-                      color: Color(0xFF263238),
+                      color: Color(0xFF342E37),
                       width: 40,
                     ),
                     SizedBox(width: 15),
@@ -165,7 +168,7 @@ class FilterPage extends StatelessWidget {
                     Icon(
                       Icons.arrow_right_rounded,
                       size: 40,
-                      color: Color(0xFF263238),
+                      color: Color(0xFF342E37),
                     ),
                   ],
                 ),

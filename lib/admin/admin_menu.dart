@@ -20,6 +20,7 @@ class AdminMenu extends StatelessWidget {
         horizontal: getProportionateScreenHeight(20),
         vertical: getProportionateScreenHeight(12),
       ),
+      // ignore: deprecated_member_use
       child: FlatButton(
         height: getProportionateScreenHeight(50),
         padding: EdgeInsets.only(
@@ -35,7 +36,7 @@ class AdminMenu extends StatelessWidget {
           children: [
             SvgPicture.asset(
               icon,
-              color: Color(0xFF263238),
+              color: Color(0xFF342E37),
               width: 40,
             ),
             SizedBox(width: 15),
@@ -50,7 +51,7 @@ class AdminMenu extends StatelessWidget {
             Icon(
               Icons.arrow_right_rounded,
               size: 40,
-              color: Color(0xFF263238),
+              color: Color(0xFF342E37),
             ),
           ],
         ),

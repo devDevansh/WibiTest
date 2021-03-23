@@ -1,19 +1,20 @@
+//import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'dart:convert';
-//import 'dart:io';
-import 'package:WIBI/home/home_screen.dart';
+import 'package:WIBI/admin/account_page.dart/accountpage.dart';
+//import 'package:WIBI/admin/account_page.dart/remove_account/remove_account_design.dart';
+import 'package:WIBI/admin/product_page.dart/add_product/add_product_design.dart';
+
+import 'package:WIBI/sell/productdetails.dart';
 import 'package:flutter/material.dart';
-import 'productdetails.dart';
-import 'sellproduct_design.dart';
+
 import 'package:http/http.dart';
 
-class SellPage extends StatefulWidget {
+class AddProduct extends StatefulWidget {
   @override
-  _SellPageState createState() => _SellPageState();
+  _AddProductState createState() => _AddProductState();
 }
 
-class _SellPageState extends State<SellPage> {
-  //PickedFile _imageFile;
-  //ImagePicker _picker = ImagePicker();
+class _AddProductState extends State<AddProduct> {
   final myController1 = TextEditingController();
   final myController2 = TextEditingController();
   final myController3 = TextEditingController();
@@ -97,12 +98,12 @@ class _SellPageState extends State<SellPage> {
           ),
           onPressed: () {
             Navigator.push(context,
-                new MaterialPageRoute(builder: (context) => HomeScreen()));
+                new MaterialPageRoute(builder: (context) => ManageAccounts()));
           },
         ),
         centerTitle: true,
         title: Text(
-          "Sell Product",
+          "Add Product",
         ),
         backgroundColor: Color(0xFF1264D1),
       ),
@@ -132,7 +133,19 @@ class _SellPageState extends State<SellPage> {
                             ),
                           ],
                         ),
-                        child: CircleAvatar(
+                        child:
+                            /* CircleAvatar(
+                          //  backgroundColor: Color(0xFF1264D1),
+                          radius: 60,
+                          child: Image.asset(
+                            'assets/images/product.png',
+                            height: 70,
+                            width: 70,
+                            fit: BoxFit.scaleDown,
+                            color: Colors.white,
+                          ),
+                        ), */
+                            CircleAvatar(
                           backgroundColor: Color(0xFF1264D1),
                           radius: 60,
                           child: Container(
@@ -177,21 +190,6 @@ class _SellPageState extends State<SellPage> {
                     ],
                   ),
                 ),
-                //   imageProfile(),
-                /*      bottomSheet(),
-                child: CircleAvatar(
-                backgroundColor: Color(0xFF1264D1),
-                radius: 60,
-                backgroundImage: NetworkImage(""),
-                child: Image.asset(
-                      'assets/images/details.png',
-                      height: 70,
-                      width: 70,
-                      fit: BoxFit.scaleDown,
-                      color: Colors.white,
-                    ),
-
-                ), */
                 SizedBox(
                   height: 25,
                 ),
@@ -522,13 +520,13 @@ class _SellPageState extends State<SellPage> {
                       color: Color(0xFF1264D1),
                       onPressed: () {
                         _validateForm();
-                        /*      postIntoDB({
+                        postIntoDB({
                           "title": myController1.text,
                           "description": myController2.text,
                           "expectedprice": myController3.text,
                           "category": _currentSelectItem,
                           "location": _currentSelectedItem,
-                        }); */
+                        });
                       },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(25.0),
@@ -552,85 +550,3 @@ class _SellPageState extends State<SellPage> {
     );
   }
 }
-
-/* Widget imageProfile() {
-  return Center(
-    child: Stack(children: <Widget>[
-      CircleAvatar(
-        radius: 80.0,
-        backgroundImage: _imageFile == null
-            ? AssetImage("assets/profile.png")
-            : FileImage(File(_imageFile.path)),
-      ),
-      Positioned(
-        bottom: 20.0,
-        right: 20.0,
-        child: InkWell(
-          onTap: () {
-            showModalBottomSheet(
-              context: context,
-              builder: ((builder) => bottomSheet()),
-            );
-          },
-          child: Icon(
-            Icons.camera_alt,
-            color: Colors.black,
-            size: 28.0,
-          ),
-        ),
-      ),
-    ]),
-  );
-} */
-
-/*   Widget bottomSheet() {
-    return Container(
-      height: 100.0,
-      width: MediaQuery.of(context).size.width,
-      margin: EdgeInsets.symmetric(
-        horizontal: 20,
-        vertical: 20,
-      ),
-      child: Column(
-        children: <Widget>[
-          Text(
-            "Choose Photo",
-            style: TextStyle(
-              fontSize: 20.0,
-            ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-            FlatButton.icon(
-              icon: Icon(Icons.camera),
-              onPressed: () {
-                takePhoto(ImageSource.camera);
-              },
-              label: Text("Camera"),
-            ),
-            FlatButton.icon(
-              icon: Icon(Icons.image),
-              onPressed: () {
-                takePhoto(ImageSource.gallery);
-              },
-              label: Text("Gallery"),
-            ),
-          ])
-        ],
-      ),
-    );
-  }
-
-  void takePhoto(ImageSource source) async {
-    final pickedFile = await _picker.getImage(
-      source: source,
-    );
-    setState(() {
-      _imageFile = pickedFile;
-      print("Image file is" + _imageFile.toString());
-    });
-  }
-}
- */

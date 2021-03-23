@@ -83,8 +83,9 @@ class _DateState extends State<Date> {
                         Navigator.push(
                             context,
                             new MaterialPageRoute(
-                                builder: (context) =>
-                                    ProductDetails(snapshot.data[index])));
+                              builder: (context) =>
+                                  ProductDetails(snapshot.data[index]),
+                            ));
                       });
                 },
               );

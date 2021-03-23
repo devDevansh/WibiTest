@@ -1,4 +1,5 @@
 import 'package:WIBI/admin/admin_screen.dart';
+import 'package:WIBI/admin/product_page.dart/add_product/addproduct.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -36,6 +37,7 @@ class ManageProducts extends StatelessWidget {
           SafeArea(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              // ignore: deprecated_member_use
               child: FlatButton(
                 height: 80,
                 padding: EdgeInsets.only(
@@ -48,18 +50,18 @@ class ManageProducts extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5)),
                 color: Color(0xFFF2F2F0),
                 onPressed: () {
-                  /* Navigator.push(
+                  Navigator.push(
                     context,
                     new MaterialPageRoute(
-                      builder: (context) => CategoryPage(),
+                      builder: (context) => AddProduct(),
                     ),
-                  ); */
+                  );
                 },
                 child: Row(
                   children: [
                     SvgPicture.asset(
                       "assets/images/add.svg",
-                      color: Color(0xFF263238),
+                      color: Color(0xFF342E37),
                       width: 40,
                     ),
                     SizedBox(width: 15),
@@ -74,7 +76,7 @@ class ManageProducts extends StatelessWidget {
                     Icon(
                       Icons.arrow_right_rounded,
                       size: 40,
-                      color: Color(0xFF263238),
+                      color: Color(0xFF342E37),
                     ),
                   ],
                 ),
@@ -108,7 +110,7 @@ class ManageProducts extends StatelessWidget {
                   children: [
                     SvgPicture.asset(
                       "assets/images/update.svg",
-                      color: Color(0xFF263238),
+                      color: Color(0xFF342E37),
                       width: 40,
                     ),
                     SizedBox(width: 15),
@@ -123,7 +125,7 @@ class ManageProducts extends StatelessWidget {
                     Icon(
                       Icons.arrow_right_rounded,
                       size: 40,
-                      color: Color(0xFF263238),
+                      color: Color(0xFF342E37),
                     ),
                   ],
                 ),
@@ -134,6 +136,7 @@ class ManageProducts extends StatelessWidget {
           SafeArea(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              // ignore: deprecated_member_use
               child: FlatButton(
                 height: 80,
                 padding: EdgeInsets.only(
@@ -157,7 +160,7 @@ class ManageProducts extends StatelessWidget {
                   children: [
                     SvgPicture.asset(
                       "assets/images/remove.svg",
-                      color: Color(0xFF263238),
+                      color: Color(0xFF342E37),
                       width: 40,
                     ),
                     SizedBox(width: 15),
@@ -172,7 +175,7 @@ class ManageProducts extends StatelessWidget {
                     Icon(
                       Icons.arrow_right_rounded,
                       size: 40,
-                      color: Color(0xFF263238),
+                      color: Color(0xFF342E37),
                     ),
                   ],
                 ),

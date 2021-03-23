@@ -12,7 +12,7 @@ class ProfilePic extends StatelessWidget {
       width: 115,
       child: Stack(
         fit: StackFit.expand,
-        overflow: Overflow.visible,
+        clipBehavior: Clip.none,
         children: [
           Container(
             decoration: BoxDecoration(
@@ -59,7 +59,7 @@ class ProfilePic extends StatelessWidget {
                     Icons.photo_camera_rounded,
                     size: 15.0,
                   ),
-                  color: Color(0xFF263238),
+                  color: Color(0xFF342E37),
                   onPressed: () {},
                 ),
               ),

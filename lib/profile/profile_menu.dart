@@ -16,6 +16,7 @@ class ProfileMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 7.5),
+      // ignore: deprecated_member_use
       child: FlatButton(
         height: 50,
         padding: EdgeInsets.all(10.0),
@@ -26,7 +27,7 @@ class ProfileMenu extends StatelessWidget {
           children: [
             SvgPicture.asset(
               icon,
-              color: Color(0xFF263238),
+              color: Color(0xFF342E37),
               width: 22,
             ),
             SizedBox(width: 10),
@@ -35,14 +36,14 @@ class ProfileMenu extends StatelessWidget {
                 text,
                 style: TextStyle(
                   fontSize: 15,
-                  color: Color(0xFF2A2D36),
+                  color: Color(0xFF342E37),
                 ),
               ),
             ),
             Icon(
               Icons.arrow_right_rounded,
               size: 30,
-              color: Color(0xFF263238),
+              color: Color(0xFF342E37),
             ),
           ],
         ),

@@ -1,5 +1,6 @@
 import 'package:WIBI/components/size_config.dart';
 import 'package:WIBI/variables.dart';
+//import 'package:WIBI/variables.dart';
 //import 'package:WIBI/details/components/ProductClass.dart';
 //import 'package:WIBI/wishlist/WishlistClass.dart';
 //import 'package:WIBI/wishlist/components/WishlistClass.dart';
@@ -36,15 +37,15 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-  void postProduct(String ts, String title, String image, int price) async {
+  postProduct(String id, String title, String image, int price) async {
     //print(ts);
     //print("log");
     Map m = {
       "user_id": userEmail,
-      "product_id": ts,
-      title: title,
-      image: image,
-      price: price
+      "product_id": id,
+      "title": title,
+      "image": image,
+      "price": price,
     };
     //print(m);
     var encodedData = jsonEncode(m);
@@ -134,11 +135,15 @@ class _BodyState extends State<Body> {
                                 height: 28.5,
                               ),
                               onPressed: () {
-                                postProduct(widget.id, widget.title,
-                                    widget.image, widget.price);
+                                postProduct(
+                                  widget.id,
+                                  widget.title,
+                                  widget.image,
+                                  widget.price,
+                                );
                               },
                             ),
-                            /*   LikeButton(
+                            /*          LikeButton(
                               size: 38,
                               circleColor: CircleColor(
                                 start: Color(0xffff0266),
@@ -158,7 +163,12 @@ class _BodyState extends State<Body> {
                                 );
                               },
                               //  onTap: onLikeButtonTapped,
-                              //onTap: postProduct(widget.id),
+                              onTap: postProduct(
+                                widget.id,
+                                widget.title,
+                                widget.image,
+                                widget.price,
+                              ),
                             ), */
                             IconButton(
                               icon: SvgPicture.asset(

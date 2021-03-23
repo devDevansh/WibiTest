@@ -5,7 +5,7 @@ InputDecoration buildInputDecoration(IconData icons, String hinttext) {
     hintText: hinttext,
     prefixIcon: Icon(
       icons,
-      color: Color(0xFF263238),
+      color: Color(0xFF342E37),
     ),
     filled: true,
     fillColor: Color(0xFFF2F2F0),

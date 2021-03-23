@@ -30,6 +30,7 @@ class DefaultButton extends StatelessWidget {
             ),
           ],
         ),
+        // ignore: deprecated_member_use
         child: RaisedButton(
           splashColor: Colors.white,
           shape:

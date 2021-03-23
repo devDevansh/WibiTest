@@ -16,8 +16,12 @@ class ProfileScreen extends StatelessWidget {
             color: Colors.white,
           ),
           onPressed: () {
-            Navigator.push(context,
-                new MaterialPageRoute(builder: (context) => HomeScreen()));
+            Navigator.push(
+              context,
+              new MaterialPageRoute(
+                builder: (context) => HomeScreen(),
+              ),
+            );
           },
         ),
         centerTitle: true,

@@ -36,6 +36,7 @@ class ManageCategories extends StatelessWidget {
           SafeArea(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              // ignore: deprecated_member_use
               child: FlatButton(
                 height: 80,
                 padding: EdgeInsets.only(
@@ -59,7 +60,7 @@ class ManageCategories extends StatelessWidget {
                   children: [
                     SvgPicture.asset(
                       "assets/images/add.svg",
-                      color: Color(0xFF263238),
+                      color: Color(0xFF342E37),
                       width: 40,
                     ),
                     SizedBox(width: 15),
@@ -74,7 +75,7 @@ class ManageCategories extends StatelessWidget {
                     Icon(
                       Icons.arrow_right_rounded,
                       size: 40,
-                      color: Color(0xFF263238),
+                      color: Color(0xFF342E37),
                     ),
                   ],
                 ),
@@ -108,7 +109,7 @@ class ManageCategories extends StatelessWidget {
                   children: [
                     SvgPicture.asset(
                       "assets/images/update.svg",
-                      color: Color(0xFF263238),
+                      color: Color(0xFF342E37),
                       width: 40,
                     ),
                     SizedBox(width: 15),
@@ -123,7 +124,7 @@ class ManageCategories extends StatelessWidget {
                     Icon(
                       Icons.arrow_right_rounded,
                       size: 40,
-                      color: Color(0xFF263238),
+                      color: Color(0xFF342E37),
                     ),
                   ],
                 ),
@@ -134,6 +135,7 @@ class ManageCategories extends StatelessWidget {
           SafeArea(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              // ignore: deprecated_member_use
               child: FlatButton(
                 height: 80,
                 padding: EdgeInsets.only(
@@ -157,7 +159,7 @@ class ManageCategories extends StatelessWidget {
                   children: [
                     SvgPicture.asset(
                       "assets/images/remove.svg",
-                      color: Color(0xFF263238),
+                      color: Color(0xFF342E37),
                       width: 40,
                     ),
                     SizedBox(width: 15),
@@ -172,7 +174,7 @@ class ManageCategories extends StatelessWidget {
                     Icon(
                       Icons.arrow_right_rounded,
                       size: 40,
-                      color: Color(0xFF263238),
+                      color: Color(0xFF342E37),
                     ),
                   ],
                 ),

@@ -1,4 +1,5 @@
 import 'package:WIBI/admin/admin_screen.dart';
+import 'package:WIBI/wishlist/wishlist_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import './profile_menu.dart';
@@ -35,7 +36,14 @@ class Body extends StatelessWidget {
           ProfileMenu(
             text: "My Wishlist",
             icon: "assets/images/wishlist.svg",
-            press: () {},
+            press: () {
+              Navigator.push(
+                context,
+                new MaterialPageRoute(
+                  builder: (context) => WishlistScreen(),
+                ),
+              );
+            },
           ),
           ProfileMenu(
             text: "Help",
@@ -75,6 +83,7 @@ class Body extends StatelessWidget {
                   ),
                 ],
               ),
+              // ignore: deprecated_member_use
               child: RaisedButton(
                 splashColor: Colors.white,
                 color: Color(0xFF1264D1),

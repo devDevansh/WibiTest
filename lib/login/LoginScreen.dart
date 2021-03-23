@@ -62,6 +62,7 @@ class _GoogleSignAppState extends State<GoogleSignApp> {
         (await _firebaseAuth.signInWithCredential(credential)).user;
     ProviderDetails providerInfo = new ProviderDetails(userDetails.providerId);
 
+    // ignore: deprecated_member_use
     List<ProviderDetails> providerData = new List<ProviderDetails>();
     providerData.add(providerInfo);
 
@@ -193,6 +194,7 @@ class _GoogleSignAppState extends State<GoogleSignApp> {
                             Container(
                               height: 45.0,
                               width: 231.0,
+                              // ignore: deprecated_member_use
                               child: FlatButton(
                                 splashColor: Colors.white,
                                 onPressed: () => _signIn(context)
