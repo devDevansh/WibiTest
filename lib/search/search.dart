@@ -171,7 +171,7 @@ class _SearchFieldState extends State<SearchField> {
                     ),
                   )
                 : Container(
-                    /* padding: EdgeInsets.only(
+                     padding: EdgeInsets.only(
                       top: getProportionateScreenWidth(10),
                       left: getProportionateScreenWidth(10),
                       right: getProportionateScreenWidth(10),
@@ -251,7 +251,7 @@ class _SearchFieldState extends State<SearchField> {
                           ),
                         );
                       },
-                    ), */
+                    ), git
                     ),
           ),
         ],
