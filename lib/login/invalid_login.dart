@@ -47,7 +47,7 @@ class Hello extends StatelessWidget {
                       ),
                       const SizedBox(width: 5),
                       Text(
-                        'is exclusive to Nineleaps personnel only.',
+                        'is exclusive to NINELEAPS personnel only.',
                         style: TextStyle(
                           fontSize: 15,
                           color: Color(0xFF546E7A),
@@ -57,7 +57,7 @@ class Hello extends StatelessWidget {
                   ),
                   const SizedBox(height: 5.0),
                   Text(
-                    'Please sign in with your Nineleaps id to continue.',
+                    'Please sign in with your NINELEAPS ID to continue.',
                     style: TextStyle(
                       fontSize: 15,
                       color: Color(0xFF546E7A),

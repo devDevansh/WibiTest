@@ -8,7 +8,7 @@ class ProductClass extends StatelessWidget {
   final String location;
   final String image;
   final int price;
-  //final String description;
+  final String description;
 
   ProductClass(
     this.id,
@@ -17,7 +17,7 @@ class ProductClass extends StatelessWidget {
     this.location,
     this.image,
     this.price,
-    //this.description,
+    this.description,
   );
   @override
   Widget build(BuildContext context) {
@@ -28,6 +28,7 @@ class ProductClass extends StatelessWidget {
       location: location,
       image: image,
       price: price,
+      description: description,
     );
   }
 }

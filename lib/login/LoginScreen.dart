@@ -75,6 +75,8 @@ class _GoogleSignAppState extends State<GoogleSignApp> {
     );
 
     userEmail = userDetails.email;
+    userName = userDetails.displayName;
+
     /*  Navigator.push(
       context,
       new MaterialPageRoute(

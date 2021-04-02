@@ -2,7 +2,7 @@ import 'package:WIBI/home/home_screen.dart';
 
 import 'package:flutter/material.dart';
 
-import 'components/body.dart';
+import 'NotificationCard.dart';
 
 class NotificationScreen extends StatelessWidget {
 /*   final String id;
@@ -56,7 +56,7 @@ class NotificationScreen extends StatelessWidget {
         ),
         backgroundColor: Color(0xFF1264D1),
       ),
-      body: Body(),
+      body: NotificationCard(),
     );
   }
 }

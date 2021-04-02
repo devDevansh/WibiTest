@@ -1,23 +1,57 @@
-//import 'package:WIBI/admin/admin_screen.dart';
 import 'package:WIBI/login/invalid_login.dart';
 import 'package:WIBI/profile/profile_screen.dart';
 import 'package:WIBI/sell/sellproduct.dart';
-//import 'package:google_sign_in/google_sign_in.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-//import '../catelements.dart';
-//import '../dummy.dart';
 import './enums.dart';
-//import '../LoginScreen.dart';
 
-class CustomBottomNavBar extends StatelessWidget {
+import 'package:url_launcher/url_launcher.dart';
+import 'dart:async';
+
+class CustomBottomNavBar extends StatefulWidget {
   CustomBottomNavBar({
     Key key,
     @required this.selectedMenu,
   }) : super(key: key);
 
   final MenuState selectedMenu;
+
+  @override
+  _CustomBottomNavBarState createState() => _CustomBottomNavBarState();
+}
+
+class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
+  Future<void> _launched;
+
+  String _launchUrl = 'https://wibi-group.slack.com';
+
+  Future<void> _launchInBrowser(String url) async {
+    if (await canLaunch(url)) {
+      await launch(
+        url,
+        forceSafariVC: false,
+        forceWebView: false,
+        headers: <String, String>{'header_key': 'header_value'},
+      );
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  Future<void> _launchInApp(String url) async {
+    if (await canLaunch(url)) {
+      await launch(
+        url,
+        forceSafariVC: true,
+        forceWebView: false,
+        headers: <String, String>{'header_key': 'header_value'},
+      );
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -115,7 +149,11 @@ class CustomBottomNavBar extends StatelessWidget {
                       width: 28.5,
                       height: 28.5,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        _launched = _launchInApp(_launchUrl);
+                      });
+                    },
                   ),
                   Text(
                     "Slack",

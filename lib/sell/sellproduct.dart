@@ -1,8 +1,10 @@
 import 'dart:convert';
 //import 'dart:io';
 import 'package:WIBI/home/home_screen.dart';
+import 'package:WIBI/sell/Image%20Upload/imageupload.dart';
+import 'package:WIBI/variables.dart';
 import 'package:flutter/material.dart';
-import 'productdetails.dart';
+
 import 'sellproduct_design.dart';
 import 'package:http/http.dart';
 
@@ -46,7 +48,8 @@ class _SellPageState extends State<SellPage> {
     'Electronics',
     'Furniture',
     'Books',
-    'Appliances'
+    'Appliances',
+    'Vehicles',
   ];
   String _dropdownError;
 
@@ -74,12 +77,26 @@ class _SellPageState extends State<SellPage> {
       print("Printing entered product details \n");
       print(title);
       print(description);
-      print(expectedprice);
+      print(int.parse(expectedprice));
       print(_currentSelectedItem);
       print(_currentSelectItem);
-      ProductDetails newProduct = new ProductDetails(title, description,
-          expectedprice, _currentSelectedItem, _currentSelectItem);
-      Map data = newProduct.mappedjson();
+      /*    ProductDetails newProduct = new ProductDetails("Dummy", "id", "asd",
+          "cat", "_currentSelectedItem", 1000, "_currentSelectItem", "123"); */
+      //Map data = newProduct.mappedjson();
+      Map data = {
+        "id": "id",
+        "title": title,
+        "category": _currentSelectItem,
+        "location": _currentSelectedItem,
+        "image": "img",
+        "price": int.parse(expectedprice),
+        "description": description,
+        "date": "date",
+        "issold": "no",
+        "email": userEmail,
+      };
+      print("Log");
+      // print(data);
       postIntoDB(data);
     }
   }
@@ -169,7 +186,14 @@ class _SellPageState extends State<SellPage> {
                                 size: 15.0,
                               ),
                               color: Color(0xFF342E37),
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  new MaterialPageRoute(
+                                    builder: (context) => ImageCapture(),
+                                  ),
+                                );
+                              },
                             ),
                           ),
                         ),

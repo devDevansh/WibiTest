@@ -1,5 +1,6 @@
 import 'package:WIBI/admin/admin_screen.dart';
 import 'package:WIBI/admin/product_page.dart/add_product/addproduct.dart';
+import 'package:WIBI/admin/product_page.dart/remove_product/remove_product.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -83,56 +84,7 @@ class ManageProducts extends StatelessWidget {
               ),
             ),
           ),
-          // const SizedBox(height: 9),
-/*           SafeArea(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-              child: FlatButton(
-                height: 80,
-                padding: EdgeInsets.only(
-                  top: 40,
-                  bottom: 40,
-                  left: 20,
-                  right: 20,
-                ),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5)),
-                color: Color(0xFFF2F2F0),
-                onPressed: () {
-                  /*            Navigator.push(
-                    context,
-                    new MaterialPageRoute(
-                      builder: (context) => Date(),
-                    ),
-                  ); */
-                },
-                child: Row(
-                  children: [
-                    SvgPicture.asset(
-                      "assets/images/update.svg",
-                      color: Color(0xFF342E37),
-                      width: 40,
-                    ),
-                    SizedBox(width: 15),
-                    Expanded(
-                      child: Text(
-                        "Update Products",
-                        style: TextStyle(
-                          fontSize: 15,
-                        ),
-                      ),
-                    ),
-                    Icon(
-                      Icons.arrow_right_rounded,
-                      size: 40,
-                      color: Color(0xFF342E37),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ), */
-          //   const SizedBox(height: 9),
+
           SafeArea(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
@@ -149,12 +101,12 @@ class ManageProducts extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5)),
                 color: Color(0xFFF2F2F0),
                 onPressed: () {
-                  /*      Navigator.push(
+                  Navigator.push(
                     context,
                     new MaterialPageRoute(
-                      builder: (context) => Price(),
+                      builder: (context) => RemoveProduct(),
                     ),
-                  ); */
+                  );
                 },
                 child: Row(
                   children: [

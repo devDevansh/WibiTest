@@ -21,7 +21,7 @@ class Body extends StatefulWidget {
   final String location;
   final String image;
   final int price;
-
+  final String description;
   Body({
     Key key,
     @required this.id,
@@ -30,6 +30,7 @@ class Body extends StatefulWidget {
     @required this.location,
     @required this.image,
     @required this.price,
+    @required this.description,
   }) : super(key: key);
 
   @override
@@ -37,15 +38,19 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-  postProduct(String id, String title, String image, int price) async {
+  postProduct(String id, String title, String category, String location,
+      String image, int price, String description) async {
     //print(ts);
     //print("log");
     Map m = {
-      "user_id": userEmail,
-      "product_id": id,
+      "email": userEmail,
+      "id": id,
       "title": title,
+      "category": category,
+      "location": location,
       "image": image,
       "price": price,
+      "description": description,
     };
     //print(m);
     var encodedData = jsonEncode(m);
@@ -71,7 +76,13 @@ class _BodyState extends State<Body> {
             aspectRatio: 1.02,
             child: Hero(
               tag: widget.id,
-              child: Image.network(widget.image),
+              child: Image.network(
+                widget.image,
+              ),
+              /*     FadeInImage.assetNetwork(
+                placeholder: 'assets/images/loading2.gif',
+                image: widget.image,
+              ), */
             ),
           ),
         ),
@@ -102,6 +113,7 @@ class _BodyState extends State<Body> {
                 location: widget.location,
                 image: widget.image,
                 price: widget.price,
+                description: widget.description,
               ),
               Container(
                 // height: getProportionateScreenHeight(170),
@@ -138,8 +150,11 @@ class _BodyState extends State<Body> {
                                 postProduct(
                                   widget.id,
                                   widget.title,
+                                  widget.category,
+                                  widget.location,
                                   widget.image,
                                   widget.price,
+                                  widget.description,
                                 );
                               },
                             ),

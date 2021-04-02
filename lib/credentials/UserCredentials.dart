@@ -32,9 +32,9 @@ class _FormPageState extends State<FormPage> {
     super.dispose();
   }
 
-  String name, email, phone, _currentSelectedItem;
-  String username, useremail, userphone, useroffice, userdesignation;
-  String userphoneno;
+  String name, email, phone, designation, _currentSelectedItem;
+  String username, useremail, usercontact, userlocation, userdesignation;
+
   List<String> _locations = [
     'Main Building',
     'CCD Building',
@@ -66,11 +66,11 @@ class _FormPageState extends State<FormPage> {
       print("Printing entered user details \n");
       print(username);
       print(useremail);
-      print(userphone);
-      print(useroffice);
+      print(usercontact);
+      print(userlocation);
       print(userdesignation);
       UserDetail newUser = new UserDetail(
-          username, useremail, userdesignation, useroffice, userphone);
+          username, useremail, userdesignation, userlocation, usercontact);
       Map data = newUser.mappedjson();
       postIntoDB(data);
       // route to the next page
@@ -153,18 +153,6 @@ class _FormPageState extends State<FormPage> {
                     ),
                   ),
                 ),
-                /*    ],
-                ), 
-                SizedBox(
-                  height: 15,
-                ), 
-                Text(
-                  'Tell us a little about yourself!',
-                  style: TextStyle(
-                    color: Color(0xFF342E37),
-                    fontSize: 15.0,
-                  ),
-                ), */
                 SizedBox(
                   height: 20,
                 ),
@@ -237,7 +225,7 @@ class _FormPageState extends State<FormPage> {
                       }
                     },
                     onSaved: (String value) {
-                      name = value;
+                      designation = value;
                       userdesignation = value;
                     },
                   ),
@@ -298,7 +286,7 @@ class _FormPageState extends State<FormPage> {
                               onChanged: (value) {
                                 setState(() {
                                   _currentSelectedItem = value;
-                                  useroffice = value;
+                                  userlocation = value;
                                   _dropdownError = null;
                                 });
                               },
@@ -339,13 +327,13 @@ class _FormPageState extends State<FormPage> {
                       } else if (value.length != 10) {
                         return 'Contact must be of 10 digits!';
                       } else {
-                        userphone = myController4.text;
+                        usercontact = myController4.text;
                         return null;
                       }
                     },
                     onSaved: (String value) {
                       phone = value;
-                      userphoneno = value;
+                      usercontact = value;
                     },
                   ),
                 ),

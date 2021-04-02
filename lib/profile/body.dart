@@ -1,19 +1,24 @@
 import 'package:WIBI/admin/admin_screen.dart';
+import 'package:WIBI/profile/my%20posts/my_posts.dart';
+
+import 'package:WIBI/profile/personal_details/personal_details.dart';
+import 'package:WIBI/profile/settings/settings_screen.dart';
 import 'package:WIBI/wishlist/wishlist_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
+
 import './profile_menu.dart';
 import './profile_pic.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-//import 'package:WIBI/variables.dart';
 
 class Body extends StatelessWidget {
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  Future<void> _signOut() async {
-    await _auth.signOut();
-    await _googleSignIn.signOut();
-  }
+/*   Future<void> _signOut() async {
+    await GoogleSignIn().disconnect();
+    await FirebaseAuth.instance.signOut();
+
+    runApp(new MaterialApp(
+      home: SplashScreen(),
+    ));
+  } */
 
   @override
   Widget build(BuildContext context) {
@@ -26,12 +31,26 @@ class Body extends StatelessWidget {
           ProfileMenu(
             text: "Personal Details",
             icon: "assets/images/personal details.svg",
-            press: () {},
+            press: () {
+              Navigator.push(
+                context,
+                new MaterialPageRoute(
+                  builder: (context) => PersonalDetails(),
+                ),
+              );
+            },
           ),
           ProfileMenu(
             text: "My Posts",
             icon: "assets/images/my posts.svg",
-            press: () {},
+            press: () {
+              Navigator.push(
+                context,
+                new MaterialPageRoute(
+                  builder: (context) => MyPosts(),
+                ),
+              );
+            },
           ),
           ProfileMenu(
             text: "My Wishlist",
@@ -45,15 +64,22 @@ class Body extends StatelessWidget {
               );
             },
           ),
-          ProfileMenu(
+          /*    ProfileMenu(
             text: "Help",
             icon: "assets/images/help.svg",
             press: () {},
-          ),
+          ), */
           ProfileMenu(
             text: "Settings",
             icon: "assets/images/settings.svg",
-            press: () {},
+            press: () {
+              Navigator.push(
+                context,
+                new MaterialPageRoute(
+                  builder: (context) => SettingsScreen(),
+                ),
+              );
+            },
           ),
           ProfileMenu(
             text: "Admin Panel",
@@ -68,7 +94,7 @@ class Body extends StatelessWidget {
             icon: "assets/images/logout.svg",
             press: () {},
           ), */
-          SizedBox(height: 20),
+          /*   SizedBox(height: 20),
           SizedBox(
             width: 150,
             height: 45,
@@ -97,7 +123,16 @@ class Body extends StatelessWidget {
                     Navigator.pop(context);
                   }
                 }, */
-                onPressed: _signOut,
+                onPressed: () {
+                  _signOut();
+                  /*   if (popValid) {
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                  } else {
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                  } */
+                },
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(25.0),
                 ),
@@ -111,14 +146,9 @@ class Body extends StatelessWidget {
                 ),
               ),
             ),
-          ),
+          ), */
         ],
       ),
     );
   }
 }
-
-/* Future<void> _signOut() async {
-  await _auth.signOut();
-  await _googleSignIn.signOut();
-} */

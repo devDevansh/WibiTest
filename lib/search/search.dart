@@ -39,6 +39,7 @@ class _SearchFieldState extends State<SearchField> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
+        backgroundColor: Color(0xFF1264D1),
         centerTitle: true,
         title: new Text('Search Product'),
         leading: IconButton(
@@ -65,7 +66,10 @@ class _SearchFieldState extends State<SearchField> {
               padding: const EdgeInsets.all(8.0),
               child: new Card(
                 child: new ListTile(
-                  leading: new Icon(Icons.search_rounded),
+                  leading: new Icon(
+                    Icons.search_rounded,
+                    color: Color(0XFF607D8B),
+                  ),
                   title: new TextField(
                     controller: controller,
                     decoration: new InputDecoration(
@@ -73,7 +77,10 @@ class _SearchFieldState extends State<SearchField> {
                     onChanged: onSearchTextChanged,
                   ),
                   trailing: new IconButton(
-                    icon: new Icon(Icons.cancel_rounded),
+                    icon: new Icon(
+                      Icons.cancel_rounded,
+                      color: Color(0XFF607D8B),
+                    ),
                     onPressed: () {
                       controller.clear();
                       onSearchTextChanged('');
@@ -113,7 +120,7 @@ class _SearchFieldState extends State<SearchField> {
                                     _searchResult[i].location,
                                     _searchResult[i].image,
                                     _searchResult[i].price,
-                                    //snapshot.data[index].description,
+                                    _searchResult[i].description,
                                   ),
                                 ),
                               );
@@ -133,8 +140,14 @@ class _SearchFieldState extends State<SearchField> {
                                     ),
                                     child: Hero(
                                       tag: _searchResult[i].id,
-                                      child: Image.network(
+                                      child:
+                                          /* Image.network(
                                         _searchResult[i].image,
+                                      ), */
+                                          FadeInImage.assetNetwork(
+                                        placeholder:
+                                            'assets/images/loading.gif',
+                                        image: _searchResult[i].image,
                                       ),
                                     ),
                                   ),
@@ -198,7 +211,7 @@ class _SearchFieldState extends State<SearchField> {
                                     _productDetails[index].location,
                                     _productDetails[index].image,
                                     _productDetails[index].price,
-                                    //snapshot.data[index].description,
+                                    _productDetails[index].description,
                                   ),
                                 ),
                               );
@@ -218,8 +231,14 @@ class _SearchFieldState extends State<SearchField> {
                                     ),
                                     child: Hero(
                                       tag: _productDetails[index].id,
-                                      child: Image.network(
+                                      child:
+                                          /* Image.network(
                                         _productDetails[index].image,
+                                      ), */
+                                          FadeInImage.assetNetwork(
+                                        placeholder:
+                                            'assets/images/loading.gif',
+                                        image: _productDetails[index].image,
                                       ),
                                     ),
                                   ),
@@ -288,6 +307,7 @@ class ProductDetails {
   final String location;
   final String image;
   final int price;
+  final String description;
 
   ProductDetails({
     @required this.id,
@@ -296,6 +316,7 @@ class ProductDetails {
     @required this.location,
     @required this.image,
     @required this.price,
+    @required this.description,
   });
 
   factory ProductDetails.fromJson(Map<String, dynamic> json) {
@@ -306,6 +327,7 @@ class ProductDetails {
       location: json['location'],
       image: json['image'],
       price: json['price'],
+      description: json['description'],
     );
   }
 }

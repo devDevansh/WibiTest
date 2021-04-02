@@ -1,6 +1,7 @@
 //import 'package:WIBI/ProductClass.dart';
 import 'package:WIBI/components/constants.dart';
 import 'package:WIBI/components/size_config.dart';
+import 'package:WIBI/variables.dart';
 
 import 'package:flutter/material.dart';
 
@@ -11,6 +12,7 @@ class ProductDescription extends StatelessWidget {
   final String location;
   final String image;
   final int price;
+  final String description;
 
   ProductDescription({
     Key key,
@@ -20,6 +22,7 @@ class ProductDescription extends StatelessWidget {
     @required this.location,
     @required this.image,
     @required this.price,
+    @required this.description,
   }) : super(key: key);
 
   @override
@@ -49,7 +52,7 @@ class ProductDescription extends StatelessWidget {
         Padding(
           padding: EdgeInsets.only(
             left: getProportionateScreenWidth(35),
-            right: getProportionateScreenWidth(35),
+            right: getProportionateScreenWidth(10),
             top: getProportionateScreenWidth(0),
             bottom: getProportionateScreenWidth(10),
           ),
@@ -63,16 +66,16 @@ class ProductDescription extends StatelessWidget {
                   fontSize: 20.0,
                 ),
               ),
-              SizedBox(width: 5),
+              SizedBox(width: 7),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    width: getProportionateScreenWidth(148),
+                    width: getProportionateScreenWidth(160),
                     child: Text(
-                      category,
+                      description,
                       maxLines: 1,
-                      // overflow: TextOverflow.ellipsis,
+                      overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Color(0xFF1264D1),
@@ -80,8 +83,7 @@ class ProductDescription extends StatelessWidget {
                       ),
                     ),
                   ),
-
-                  //SizedBox(width: 5),
+                  SizedBox(width: 5),
                   GestureDetector(
                     onTap: () {},
                     child: Icon(
@@ -112,7 +114,7 @@ class ProductDescription extends StatelessWidget {
                   fontSize: 20.0,
                 ),
               ),
-              SizedBox(width: 5),
+              SizedBox(width: 7),
               Text(
                 "\u{20B9}\u{0020}$price",
                 maxLines: 1,
@@ -136,6 +138,74 @@ class ProductDescription extends StatelessWidget {
           child: Row(
             children: [
               Text(
+                'Seller :',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF546E7A),
+                  fontSize: 20.0,
+                ),
+              ),
+              SizedBox(width: 7),
+              Container(
+                width: getProportionateScreenWidth(239),
+                child: Text(
+                  userName,
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF1264D1),
+                    fontSize: 20.0,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.only(
+            left: getProportionateScreenWidth(35),
+            right: getProportionateScreenWidth(35),
+            top: getProportionateScreenWidth(0),
+            bottom: getProportionateScreenWidth(20),
+          ),
+          child: Row(
+            children: [
+              Text(
+                'Seller\'s ID :',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF546E7A),
+                  fontSize: 20.0,
+                ),
+              ),
+              SizedBox(width: 7),
+              Container(
+                width: getProportionateScreenWidth(202),
+                child: Text(
+                  userEmail,
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF1264D1),
+                    fontSize: 20.0,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.only(
+            left: getProportionateScreenWidth(35),
+            right: getProportionateScreenWidth(35),
+            top: getProportionateScreenWidth(0),
+            bottom: getProportionateScreenWidth(20),
+          ),
+          child: Row(
+            children: [
+              Text(
                 'Location :',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -143,7 +213,7 @@ class ProductDescription extends StatelessWidget {
                   fontSize: 20.0,
                 ),
               ),
-              SizedBox(width: 5),
+              SizedBox(width: 7),
               Text(
                 location,
                 maxLines: 1,

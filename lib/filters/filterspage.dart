@@ -2,9 +2,9 @@ import 'package:WIBI/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import 'catelements.dart';
-import 'date.dart';
-import 'price.dart';
+import 'categorypage.dart';
+import 'datepage.dart';
+import 'pricepage.dart';
 
 class FilterPage extends StatelessWidget {
   @override
@@ -131,8 +131,9 @@ class FilterPage extends StatelessWidget {
           ),
           //   const SizedBox(height: 9),
           SafeArea(
-            child: Padding(
+            child: Container(
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+
               // ignore: deprecated_member_use
               child: FlatButton(
                 height: 80,

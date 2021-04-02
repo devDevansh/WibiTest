@@ -1,4 +1,5 @@
 import 'package:WIBI/admin/account_page.dart/add_account/addaccount.dart';
+import 'package:WIBI/admin/account_page.dart/remove_account/remove_account.dart';
 //import 'package:WIBI/admin/account_page.dart/remove_account/removeaccount.dart';
 import 'package:WIBI/admin/admin_screen.dart';
 //import 'package:WIBI/sell/sellproduct.dart';
@@ -67,7 +68,7 @@ class ManageAccounts extends StatelessWidget {
                       SizedBox(width: 15),
                       Expanded(
                         child: Text(
-                          "Add Account",
+                          "Add Accounts",
                           style: TextStyle(
                             fontSize: 15,
                           ),
@@ -83,7 +84,6 @@ class ManageAccounts extends StatelessWidget {
                 ),
               ),
             ),
-
             SafeArea(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
@@ -100,12 +100,12 @@ class ManageAccounts extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5)),
                   color: Color(0xFFF2F2F0),
                   onPressed: () {
-                    /*  Navigator.push(
+                    Navigator.push(
                       context,
                       new MaterialPageRoute(
                         builder: (context) => RemoveAccount(),
                       ),
-                    ); */
+                    );
                   },
                   child: Row(
                     children: [
@@ -117,7 +117,7 @@ class ManageAccounts extends StatelessWidget {
                       SizedBox(width: 15),
                       Expanded(
                         child: Text(
-                          "Remove Account",
+                          "Remove Accounts",
                           style: TextStyle(
                             fontSize: 15,
                           ),
@@ -133,7 +133,6 @@ class ManageAccounts extends StatelessWidget {
                 ),
               ),
             ),
-            //const SizedBox(height: 9),
           ],
         ),
       ),

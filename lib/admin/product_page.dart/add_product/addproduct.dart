@@ -4,7 +4,6 @@ import 'package:WIBI/admin/account_page.dart/accountpage.dart';
 //import 'package:WIBI/admin/account_page.dart/remove_account/remove_account_design.dart';
 import 'package:WIBI/admin/product_page.dart/add_product/add_product_design.dart';
 
-import 'package:WIBI/sell/productdetails.dart';
 import 'package:flutter/material.dart';
 
 import 'package:http/http.dart';
@@ -78,9 +77,29 @@ class _AddProductState extends State<AddProduct> {
       print(expectedprice);
       print(_currentSelectedItem);
       print(_currentSelectItem);
-      ProductDetails newProduct = new ProductDetails(title, description,
-          expectedprice, _currentSelectedItem, _currentSelectItem);
-      Map data = newProduct.mappedjson();
+      /*  ProductDetails newProduct = new ProductDetails(
+          title,
+          description,
+          expectedprice,
+          _currentSelectedItem,
+          _currentSelectItem,
+          1000,
+          "hi",
+          "bye");
+      Map data = newProduct.mappedjson(); */
+      Map data = {
+        "id": "id",
+        "title": title,
+        "category": _currentSelectedItem,
+        "location": _currentSelectItem,
+        "image": "img",
+        "price": int.parse(expectedprice),
+        "description": description,
+        "date": "date",
+        "issold": "no",
+      };
+      print("Log");
+      // print(data);
       postIntoDB(data);
     }
   }

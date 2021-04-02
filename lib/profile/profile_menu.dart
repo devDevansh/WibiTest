@@ -18,7 +18,7 @@ class ProfileMenu extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 7.5),
       // ignore: deprecated_member_use
       child: FlatButton(
-        height: 50,
+        height: 78,
         padding: EdgeInsets.all(10.0),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
         color: Color(0xFFF2F2F0),

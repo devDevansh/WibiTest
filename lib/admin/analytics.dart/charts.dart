@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:WIBI/admin/admin_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import 'package:http/http.dart';
 
 class AnalyticsPage extends StatefulWidget {
   final Widget child;
@@ -12,38 +15,89 @@ class AnalyticsPage extends StatefulWidget {
 }
 
 class _AnalyticsPageState extends State<AnalyticsPage> {
-  List<charts.Series<Users, String>> _seriesData;
-  List<charts.Series<Category, String>> _seriesPieData;
-  List<charts.Series<Sales, int>> _seriesLineData;
+  List<charts.Series<CountProductsByDate, String>> _seriesData;
+  List<charts.Series<ProductByCat, String>> _seriesPieData;
+  //List<charts.Series<Sales, int>> _seriesLineData;
+  Map<String, int> m = new Map<String, int>();
+  Map<String, int> m2 = new Map<String, int>();
+  String s = "Total users";
+  int totalUsers;
+
+  Future<Map> getProductCountByDate() async {
+    Response response = await get('http://10.0.2.2:8080/countprodbydate');
+    var decode = jsonDecode(response.body);
+    return decode;
+  }
+
+  Future<Map> countprodbycat() async {
+    Response response = await get('http://10.0.2.2:8080/countprodbycat');
+    var decode = jsonDecode(response.body);
+    return decode;
+  }
+
+  Future<int> noOfUsers() async {
+    Response response = await get('http://10.0.2.2:8080/countusers');
+    var decode = jsonDecode(response.body);
+    print(decode);
+    return decode;
+  }
 
   _generateData() {
-    /* var data1 = [
-      new Users(2021, 'Jan-April', 30),
-      new Users(2021, 'May-Aug', 40),
-      new Users(2021, 'Sept-Dec', 10),
-    ];*/
-    var data2 = [
-      new Users(2021, 'Jan-April', 100),
-      new Users(2021, 'May-Aug', 150),
-      new Users(2021, 'Sept-Dec', 80),
-    ];
-    /*var data3 = [
-      new Pollution(1985, 'Jan-April', 200),
-      new Pollution(1980, 'May-Aug', 300),
-      new Pollution(1985, 'Sept-Dec', 180),
-    ];*/
+    noOfUsers().then((value) {
+      totalUsers = value;
+    });
+    // ignore: deprecated_member_use
+    List<CountProductsByDate> data2 = new List<CountProductsByDate>();
+    getProductCountByDate().then((value) {
+      print("Printing the map here ");
+      print(value);
+      print(value.length);
+      value.forEach((k, v) {
+        print('$k: $v');
+        String key = k.toString();
+        int values = int.parse(v.toString());
 
-    var piedata = [
-      new Category('Electronics', 34, Color(0xff3366cc)),
-      new Category('Books', 9.5, Color(0xff990099)),
-      new Category('Appliances', 10.5, Color(0xff109618)),
-      new Category('Furniture', 16, Color(0xfffdbe19)),
-      new Category('Clothes', 19, Color(0xffff9900)),
-      new Category('Other', 11, Color(0xffdc3912)),
-    ];
+        print(key);
+        print(values);
+        m[key] = values;
+        if (data2.length < 4) {
+          data2.add(new CountProductsByDate(key, values, false));
+        }
+        if (data2.length == 3)
+          data2.add(new CountProductsByDate("Total Users", totalUsers, true));
+      });
+    });
 
-    // ignore: unused_local_variable
-    var linesalesdata = [
+    // ignore: deprecated_member_use
+    List<ProductByCat> piedata = new List<ProductByCat>();
+    int colorPicker = 0;
+    List<Color> colorVals = [
+      Color(0xff233C75),
+      Color(0xff1D5391),
+      Color(0xff0077BC),
+      Color(0xff1DA3B8),
+      Color(0xff50BFA1),
+      Color(0xff67DBBC),
+      Color(0xff8CD9C4),
+    ];
+    countprodbycat().then((value) {
+      print("Printing the map here ");
+      print(value);
+      print(value.length);
+      value.forEach((k, v) {
+        print('$k: $v');
+        String key = k.toString();
+        int values = int.parse(v.toString());
+
+        print(key);
+        print(values);
+        m2[key] = values;
+        piedata.add(new ProductByCat(key, values, colorVals[colorPicker]));
+        colorPicker++;
+      });
+    });
+
+    /*    var linesalesdata = [
       new Sales(0, 45),
       new Sales(1, 56),
       new Sales(2, 55),
@@ -60,64 +114,46 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
       new Sales(5, 60),
     ];
 
-    /*var linesalesdata2 = [
+    var linesalesdata2 = [
       new Sales(0, 20),
       new Sales(1, 24),
       new Sales(2, 25),
       new Sales(3, 40),
       new Sales(4, 45),
       new Sales(5, 60),
-    ];*/
+    ]; */
 
-    /*_seriesData.add(
-      charts.Series(
-        domainFn: (Users users, _) => users.place,
-        measureFn: (Users users, _) => users.inactive,
-        id: '2017',
-        data: data1,
-        fillPatternFn: (_, __) => charts.FillPatternType.solid,
-        fillColorFn: (Users users, _) =>
-            charts.ColorUtil.fromDartColor(Color(0xff990099)),
-      ),
-    );*/
-
+    // this is for the Bar chart
     _seriesData.add(
       charts.Series(
-        domainFn: (Users users, _) => users.place,
-        measureFn: (Users users, _) => users.inactive,
-        id: '2018',
-        data: data2,
-        fillPatternFn: (_, __) => charts.FillPatternType.solid,
-        fillColorFn: (Users users, _) =>
-            charts.ColorUtil.fromDartColor(Color(0xFF1264D1)),
-      ),
+          domainFn: (CountProductsByDate countProductsByDate, _) =>
+              countProductsByDate.date,
+          measureFn: (CountProductsByDate countProductsByDate, _) =>
+              countProductsByDate.count,
+          id: '2018',
+          data: data2,
+          fillPatternFn: (_, __) => charts.FillPatternType.solid,
+          fillColorFn: (CountProductsByDate users, _) {
+            if (users.flag)
+              return charts.ColorUtil.fromDartColor(Color(0xff50BFA1));
+            return charts.ColorUtil.fromDartColor(Color(0xff1264d1));
+          }),
     );
 
-    /* _seriesData.add(
-      charts.Series(
-        domainFn: (Pollution pollution, _) => pollution.place,
-        measureFn: (Pollution pollution, _) => pollution.quantity,
-        id: '2019',
-        data: data3,
-        fillPatternFn: (_, __) => charts.FillPatternType.solid,
-        fillColorFn: (Pollution pollution, _) =>
-            charts.ColorUtil.fromDartColor(Color(0xffff9900)),
-      ),
-    );*/
-
+    // this is for the pir chart
     _seriesPieData.add(
       charts.Series(
-        domainFn: (Category category, _) => category.category,
-        measureFn: (Category category, _) => category.categoryvalue,
-        colorFn: (Category category, _) =>
+        domainFn: (ProductByCat category, _) => category.category,
+        measureFn: (ProductByCat category, _) => category.count,
+        colorFn: (ProductByCat category, _) =>
             charts.ColorUtil.fromDartColor(category.colorval),
         id: 'WIBI',
         data: piedata,
-        labelAccessorFn: (Category row, _) => '${row.categoryvalue}',
+        labelAccessorFn: (ProductByCat row, _) => '${row.count}',
       ),
     );
 
-    /* _seriesLineData.add(
+/*     _seriesLineData.add(
       charts.Series(
         colorFn: (__, _) => charts.ColorUtil.fromDartColor(Color(0xff990099)),
         id: 'WIBI',
@@ -125,17 +161,17 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
         domainFn: (Sales sales, _) => sales.yearval,
         measureFn: (Sales sales, _) => sales.salesval,
       ),
-    );*/
+    );
     _seriesLineData.add(
       charts.Series(
-        colorFn: (__, _) => charts.ColorUtil.fromDartColor(Color(0xFF1264D1)),
+        colorFn: (__, _) => charts.ColorUtil.fromDartColor(Color(0xff109618)),
         id: 'WIBI',
         data: linesalesdata1,
         domainFn: (Sales sales, _) => sales.yearval,
         measureFn: (Sales sales, _) => sales.salesval,
       ),
     );
-    /*_seriesLineData.add(
+    _seriesLineData.add(
       charts.Series(
         colorFn: (__, _) => charts.ColorUtil.fromDartColor(Color(0xffff9900)),
         id: 'Air Pollution',
@@ -143,186 +179,292 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
         domainFn: (Sales sales, _) => sales.yearval,
         measureFn: (Sales sales, _) => sales.salesval,
       ),
-    );*/
+    ); */
   }
 
   @override
   void initState() {
     super.initState();
+
     // ignore: deprecated_member_use
-    _seriesData = List<charts.Series<Users, String>>();
+    _seriesData = List<charts.Series<CountProductsByDate, String>>();
     // ignore: deprecated_member_use
-    _seriesPieData = List<charts.Series<Category, String>>();
-    // ignore: deprecated_member_use
-    _seriesLineData = List<charts.Series<Sales, int>>();
+    _seriesPieData = List<charts.Series<ProductByCat, String>>();
+    /*  // ignore: deprecated_member_use
+    _seriesLineData = List<charts.Series<Sales, int>>(); */
     _generateData();
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: DefaultTabController(
-        length: 3,
-        child: Scaffold(
-          appBar: AppBar(
-            leading: IconButton(
-              icon: Icon(
-                Icons.arrow_left_rounded,
-                size: 40.0,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  new MaterialPageRoute(
-                    builder: (context) => AdminScreen(),
-                  ),
-                );
-              },
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_left_rounded,
+              size: 40.0,
+              color: Colors.white,
             ),
-            backgroundColor: Color(0xFF1264D1),
-            bottom: TabBar(
-              indicatorColor: Color(0xff9962D0),
-              tabs: [
-                Tab(
-                  icon: Icon(FontAwesomeIcons.solidChartBar),
+            onPressed: () {
+              Navigator.push(
+                context,
+                new MaterialPageRoute(
+                  builder: (context) => AdminScreen(),
                 ),
-                Tab(icon: Icon(FontAwesomeIcons.chartPie)),
-                Tab(icon: Icon(FontAwesomeIcons.chartLine)),
-              ],
-            ),
-            centerTitle: true,
-            title: Text('Wibi Analytics'),
+              );
+            },
           ),
-          body: TabBarView(
-            children: [
-              Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Container(
-                  child: Center(
-                    child: Column(
-                      children: <Widget>[
-                        Text(
-                          'Number of Users',
-                          style: TextStyle(
-                              fontSize: 24.0, fontWeight: FontWeight.bold),
-                        ),
-                        Expanded(
-                          child: charts.BarChart(
-                            _seriesData,
-                            animate: true,
-                            barGroupingType: charts.BarGroupingType.grouped,
-                            //behaviors: [new charts.SeriesLegend()],
-                            animationDuration: Duration(seconds: 2),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Container(
-                  child: Center(
-                    child: Column(
-                      children: <Widget>[
-                        Text(
-                          'Number of Products by Category',
-                          style: TextStyle(
-                              fontSize: 24.0, fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(
-                          height: 10.0,
-                        ),
-                        Expanded(
-                          child: charts.PieChart(_seriesPieData,
-                              animate: true,
-                              animationDuration: Duration(seconds: 2),
-                              behaviors: [
-                                new charts.DatumLegend(
-                                  outsideJustification:
-                                      charts.OutsideJustification.endDrawArea,
-                                  horizontalFirst: false,
-                                  desiredMaxRows: 2,
-                                  cellPadding: new EdgeInsets.only(
-                                      right: 4.0, bottom: 4.0),
-                                  entryTextStyle: charts.TextStyleSpec(
-                                      color: charts
-                                          .MaterialPalette.purple.shadeDefault,
-                                      fontFamily: 'Georgia',
-                                      fontSize: 11),
-                                )
-                              ],
-                              defaultRenderer: new charts.ArcRendererConfig(
-                                  arcWidth: 100,
-                                  arcRendererDecorators: [
-                                    new charts.ArcLabelDecorator(
-                                        labelPosition:
-                                            charts.ArcLabelPosition.inside)
-                                  ])),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Container(
-                  child: Center(
-                    child: Column(
-                      children: <Widget>[
-                        Text(
-                          'Products posted for the first 5 months',
-                          style: TextStyle(
-                              fontSize: 24.0, fontWeight: FontWeight.bold),
-                        ),
-                        Expanded(
-                          child: charts.LineChart(_seriesLineData,
-                              defaultRenderer: new charts.LineRendererConfig(
-                                  includeArea: true, stacked: true),
-                              animate: true,
-                              animationDuration: Duration(seconds: 2),
-                              behaviors: [
-                                new charts.ChartTitle('Months',
-                                    behaviorPosition:
-                                        charts.BehaviorPosition.bottom,
-                                    titleOutsideJustification: charts
-                                        .OutsideJustification.middleDrawArea),
-                                new charts.ChartTitle('Products',
-                                    behaviorPosition:
-                                        charts.BehaviorPosition.start,
-                                    titleOutsideJustification: charts
-                                        .OutsideJustification.middleDrawArea),
-                                new charts.ChartTitle(
-                                  'Posted',
-                                  behaviorPosition: charts.BehaviorPosition.end,
-                                  titleOutsideJustification: charts
-                                      .OutsideJustification.middleDrawArea,
-                                )
-                              ]),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+          backgroundColor: Color(0xFF1264D1),
+          bottom: TabBar(
+            tabs: [
+              Tab(icon: Icon(Icons.bar_chart_rounded, size: 40)),
+              Tab(icon: Icon(Icons.pie_chart_rounded, size: 32)),
+
+              //Tab(icon: Icon(Icons.show_chart_rounded, size: 38)),
             ],
           ),
+          centerTitle: true,
+          title: Text(
+            'Analytics',
+            style: TextStyle(
+              fontFamily: 'Product Sans',
+            ),
+          ),
+        ),
+        body: TabBarView(
+          children: [
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Container(
+                child: Center(
+                  child: Column(
+                    children: <Widget>[
+                      SizedBox(
+                        height: 40.0,
+                      ),
+                      Text(
+                        'User\'s Analytics',
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Visby Round',
+                          color: Color(0xFF1264D1),
+                        ),
+                      ),
+                      SizedBox(height: 50),
+                      Expanded(
+                        child: charts.BarChart(
+                          _seriesData,
+                          animate: true,
+                          barGroupingType: charts.BarGroupingType.grouped,
+                          animationDuration: Duration(seconds: 2),
+                          domainAxis: new charts.OrdinalAxisSpec(
+                            renderSpec: new charts.SmallTickRendererSpec(
+                              labelStyle: new charts.TextStyleSpec(
+                                fontSize: 14,
+                                fontFamily: 'Product Sans',
+                                color: charts.Color.fromHex(code: '#342E37'),
+                              ),
+                              lineStyle: new charts.LineStyleSpec(
+                                color: charts.Color.fromHex(code: '#1264D1'),
+                              ),
+                            ),
+                          ),
+                          primaryMeasureAxis: new charts.NumericAxisSpec(
+                            renderSpec: new charts.GridlineRendererSpec(
+                              labelStyle: new charts.TextStyleSpec(
+                                fontSize: 13,
+                                fontFamily: 'Product Sans',
+                                color: charts.Color.fromHex(code: '#342E37'),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 40),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Container(
+                child: Center(
+                  child: Column(
+                    children: <Widget>[
+                      SizedBox(
+                        height: 40.0,
+                      ),
+                      Text(
+                        'Product\'s Analytics',
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Visby Round',
+                          color: Color(0xFF1264D1),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 40.0,
+                      ),
+                      Expanded(
+                        child: charts.PieChart(
+                          _seriesPieData,
+                          animate: true,
+                          animationDuration: Duration(seconds: 2),
+                          defaultRenderer: new charts.ArcRendererConfig(
+                            arcWidth: 100,
+                            arcRendererDecorators: [
+                              new charts.ArcLabelDecorator(
+                                labelPosition: charts.ArcLabelPosition.inside,
+                                insideLabelStyleSpec: new charts.TextStyleSpec(
+                                    color:
+                                        charts.Color.fromHex(code: '#ffffff'),
+                                    fontSize: 15,
+                                    fontFamily: "Product Sans"),
+                              )
+                            ],
+                          ),
+                          behaviors: [
+                            new charts.DatumLegend(
+                              position: charts.BehaviorPosition.bottom,
+                              outsideJustification:
+                                  charts.OutsideJustification.startDrawArea,
+                              horizontalFirst: false,
+                              desiredMaxRows: 6,
+                              cellPadding:
+                                  new EdgeInsets.only(right: 6.0, bottom: 6.0),
+                              entryTextStyle: charts.TextStyleSpec(
+                                  color: charts.Color.fromHex(code: '#342E37'),
+                                  fontFamily: 'Product Sans',
+                                  fontSize: 14),
+                            )
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 40),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+
+            /*     Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Container(
+                  child: Center(
+                    child: Column(
+                      children: <Widget>[
+                        SizedBox(
+                          height: 40.0,
+                        ),
+                        Text(
+                          'Posted Products Analytics',
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Visby Round',
+                            color: Color(0xFF1264D1),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 50.0,
+                        ),
+                        Expanded(
+                          child: charts.LineChart(
+                            _seriesLineData,
+                            defaultRenderer: new charts.LineRendererConfig(
+                                includeArea: true, stacked: true),
+                            animate: true,
+                            animationDuration: Duration(seconds: 2),
+                            primaryMeasureAxis: new charts.NumericAxisSpec(
+                              renderSpec: new charts.GridlineRendererSpec(
+                                labelStyle: new charts.TextStyleSpec(
+                                  fontSize: 13,
+                                  fontFamily: 'Product Sans',
+                                  color: charts.Color.fromHex(code: '#342E37'),
+                                ),
+                              ),
+                            ),
+                            /*             domainAxis: new charts.OrdinalAxisSpec(
+                              renderSpec: new charts.SmallTickRendererSpec(
+                                labelStyle: new charts.TextStyleSpec(
+                                  fontSize: 14,
+                                  fontFamily: 'Product Sans',
+                                  color: charts.Color.fromHex(code: '#342E37'),
+                                ),
+                                lineStyle: new charts.LineStyleSpec(
+                                  color: charts.Color.fromHex(code: '#1264D1'),
+                                ),
+                              ),
+                            ), */
+                            behaviors: [
+                              new charts.ChartTitle(
+                                'Months',
+                                behaviorPosition:
+                                    charts.BehaviorPosition.bottom,
+                                titleOutsideJustification:
+                                    charts.OutsideJustification.middleDrawArea,
+                                titleStyleSpec: charts.TextStyleSpec(
+                                  fontFamily: "Product Sans",
+                                  color: charts.Color.fromHex(code: '#342E37'),
+                                  fontSize: 13,
+                                ),
+                              ),
+                              new charts.ChartTitle(
+                                'No. of Products',
+                                behaviorPosition: charts.BehaviorPosition.start,
+                                titleOutsideJustification:
+                                    charts.OutsideJustification.middleDrawArea,
+                                titleStyleSpec: charts.TextStyleSpec(
+                                  fontFamily: "Product Sans",
+                                  color: charts.Color.fromHex(code: '#342E37'),
+                                  fontSize: 13,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: 30),
+                      ],
+                    ),
+                  ),
+                ),
+              ), */
+          ],
         ),
       ),
     );
+    //  );
   }
 }
 
-class Users {
-  String place;
-  int active;
-  int inactive;
+class CountProductsByDate {
+  String date;
+  int count;
+  bool flag;
 
-  Users(this.active, this.place, this.inactive);
+  CountProductsByDate(this.date, this.count, this.flag);
 }
+
+class ProductByCat {
+  String category;
+  int count;
+  Color colorval;
+
+  ProductByCat(this.category, this.count, this.colorval);
+}
+
+// class Users {
+//   String place;
+//   int active;
+//   int inactive;
+
+//   Users(this.active, this.place, this.inactive);
+// }
 
 class Category {
   String category;

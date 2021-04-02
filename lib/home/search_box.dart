@@ -25,24 +25,16 @@ class SearchBox extends StatelessWidget {
         },
         child: Padding(
           padding: EdgeInsets.only(
-            left: getProportionateScreenWidth(14),
-            top: getProportionateScreenWidth(14),
-            right: getProportionateScreenWidth(4),
-            bottom: getProportionateScreenWidth(14),
+            left: getProportionateScreenWidth(6),
+            top: getProportionateScreenWidth(7),
+            right: getProportionateScreenWidth(64),
+            bottom: getProportionateScreenWidth(5),
           ),
-          child: Row(
-            children: [
-              SizedBox(width: 9),
-              Text(
-                "Search",
-              ),
-              SizedBox(width: 21),
-              Icon(
-                Icons.search_rounded,
-                size: 17,
-                color: Color(0xFF342E37),
-              ),
-            ],
+          child: Icon(
+            Icons.search_rounded,
+            size: 35,
+            /* color: Color(0xFF342E37), */
+            color: Color(0xFF546E7A),
           ),
         ),
       ),

@@ -10,6 +10,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+//import 'dart:io';
 
 class ProductCard extends StatefulWidget {
   final double width, aspectRatio;
@@ -24,15 +25,19 @@ class ProductCard extends StatefulWidget {
 }
 
 class _ProductCardState extends State<ProductCard> {
-  postProduct(String id, String title, String image, int price) async {
+  postProduct(String id, String title, String category, String location,
+      String image, int price, String description) async {
     //print(ts);
     // print("log");
     Map m = {
-      "user_id": userEmail,
-      "product_id": id,
+      "email": userEmail,
+      "id": id,
       "title": title,
+      "category": category,
+      "location": location,
       "image": image,
       "price": price,
+      "description": description,
     };
     print(m);
     var encodedData = jsonEncode(m);
@@ -51,7 +56,7 @@ class _ProductCardState extends State<ProductCard> {
         prod["location"],
         prod["image"],
         prod["price"],
-        //prod["description"],
+        prod["description"],
       );
       products.add(product);
     }
@@ -112,7 +117,7 @@ class _ProductCardState extends State<ProductCard> {
                               snapshot.data[index].location,
                               snapshot.data[index].image,
                               snapshot.data[index].price,
-                              //snapshot.data[index].description,
+                              snapshot.data[index].description,
                             ),
                           ),
                         );
@@ -132,8 +137,13 @@ class _ProductCardState extends State<ProductCard> {
                               ),
                               child: Hero(
                                 tag: snapshot.data[index].id,
-                                child: Image.network(
+                                child:
+                                    /* Image.network(
                                   snapshot.data[index].image,
+                                ), */
+                                    FadeInImage.assetNetwork(
+                                  placeholder: 'assets/images/loading.gif',
+                                  image: snapshot.data[index].image,
                                 ),
                               ),
                             ),
@@ -186,8 +196,11 @@ class _ProductCardState extends State<ProductCard> {
                                           postProduct(
                                             snapshot.data[index].id,
                                             snapshot.data[index].title,
+                                            snapshot.data[index].category,
+                                            snapshot.data[index].location,
                                             snapshot.data[index].image,
                                             snapshot.data[index].price,
+                                            snapshot.data[index].description,
                                           );
                                         },
                                       ),
@@ -235,16 +248,12 @@ class _ProductCardState extends State<ProductCard> {
                               color: Color(0xFF342E37),
                             ),
                           ),
-                          /*  const SizedBox(
-                            height: 10, */
-                          // ),
                         ],
                       ),
                     ),
                   );
                 },
               ),
-              // ),
             );
           }
         },
@@ -261,7 +270,7 @@ class Product {
   final String image;
 
   final int price;
-  //final String description;
+  final String description;
 
   Product(
     this.id,
@@ -270,6 +279,6 @@ class Product {
     this.location,
     this.image,
     this.price,
-    //this.description,
+    this.description,
   );
 }

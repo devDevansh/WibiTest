@@ -11,6 +11,7 @@ class ProductScreen extends StatelessWidget {
   final String location;
   final String image;
   final int price;
+  final String description;
 
   ProductScreen({
     Key key,
@@ -20,12 +21,13 @@ class ProductScreen extends StatelessWidget {
     @required this.location,
     @required this.image,
     @required this.price,
+    @required this.description,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF5F6F9),
+      // backgroundColor: Color(0xFFF5F6F9),
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(
@@ -60,6 +62,7 @@ class ProductScreen extends StatelessWidget {
         location: location,
         image: image,
         price: price,
+        description: description,
       ),
     );
   }
