@@ -1,5 +1,6 @@
 //import 'package:WIBI/profile/personal_details/personal.dart';
 
+import 'package:WIBI/profile/settings/donate.dart';
 import 'package:WIBI/profile/settings/help.dart';
 import 'package:WIBI/profile/settings/settings_pic.dart';
 import 'package:WIBI/splash/splash_screen.dart';
@@ -35,6 +36,18 @@ class Body extends StatelessWidget {
                 context,
                 new MaterialPageRoute(
                   builder: (context) => HelpScreen(),
+                ),
+              );
+            },
+          ),
+          ProfileMenu(
+            text: "Donate",
+            icon: "assets/images/donate.svg",
+            press: () {
+              Navigator.push(
+                context,
+                new MaterialPageRoute(
+                  builder: (context) => DonateScreen(),
                 ),
               );
             },

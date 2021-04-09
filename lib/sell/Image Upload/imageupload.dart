@@ -128,7 +128,7 @@ class _UploaderState extends State<Uploader> {
 
     setState(() {
       _uploadTask = _storage.ref().child(filePath).putFile(widget.file);
-      print(_storage.ref());
+      //print(_storage.ref());
     });
   }
 

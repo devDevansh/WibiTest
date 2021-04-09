@@ -32,9 +32,9 @@ class SearchBox extends StatelessWidget {
           ),
           child: Icon(
             Icons.search_rounded,
-            size: 35,
-            /* color: Color(0xFF342E37), */
-            color: Color(0xFF546E7A),
+            size: 36,
+            color: Color(0xFF342E37),
+            //  color: Color(0xFF546E7A),
           ),
         ),
       ),

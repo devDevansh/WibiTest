@@ -163,7 +163,7 @@ class _FormPageState extends State<FormPage> {
                     keyboardType: TextInputType.text,
                     controller: myController1,
                     decoration:
-                        buildInputDecoration(Icons.person_rounded, 'Name'),
+                        buildInputDecoration(Icons.person_rounded, 'Full Name'),
                     validator: (String value) {
                       // this is the validation part that is displayed on the bottom of the text feild
                       if (value.isEmpty) {

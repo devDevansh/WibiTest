@@ -1,7 +1,7 @@
 import 'dart:convert';
 //import 'dart:io';
 import 'package:WIBI/home/home_screen.dart';
-import 'package:WIBI/sell/Image%20Upload/imageupload.dart';
+
 import 'package:WIBI/variables.dart';
 import 'package:flutter/material.dart';
 
@@ -98,6 +98,10 @@ class _SellPageState extends State<SellPage> {
       print("Log");
       // print(data);
       postIntoDB(data);
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => HomeScreen()),
+      );
     }
   }
 
@@ -187,12 +191,12 @@ class _SellPageState extends State<SellPage> {
                               ),
                               color: Color(0xFF342E37),
                               onPressed: () {
-                                Navigator.push(
+                                /*     Navigator.push(
                                   context,
                                   new MaterialPageRoute(
                                     builder: (context) => ImageCapture(),
                                   ),
-                                );
+                                ); */
                               },
                             ),
                           ),

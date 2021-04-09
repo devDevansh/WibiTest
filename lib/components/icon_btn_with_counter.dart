@@ -38,7 +38,7 @@ class IconBtnWithCounter extends StatelessWidget {
               width: 10,
             ),
           ),
-          if (numOfitem != 0)
+          /* if (numOfitem != 0)
             Positioned(
               top: -3,
               right: 0,
@@ -62,7 +62,7 @@ class IconBtnWithCounter extends StatelessWidget {
                   ),
                 ),
               ),
-            ),
+            ), */
         ],
       ),
     );

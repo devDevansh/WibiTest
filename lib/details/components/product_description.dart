@@ -1,5 +1,3 @@
-//import 'package:WIBI/ProductClass.dart';
-import 'package:WIBI/components/constants.dart';
 import 'package:WIBI/components/size_config.dart';
 import 'package:WIBI/variables.dart';
 
@@ -84,14 +82,14 @@ class ProductDescription extends StatelessWidget {
                     ),
                   ),
                   SizedBox(width: 5),
-                  GestureDetector(
+                  /*    GestureDetector(
                     onTap: () {},
                     child: Icon(
                       Icons.arrow_drop_down_rounded,
                       size: 40,
                       color: kPrimaryColor,
                     ),
-                  ),
+                  ), */
                 ],
               ),
             ],

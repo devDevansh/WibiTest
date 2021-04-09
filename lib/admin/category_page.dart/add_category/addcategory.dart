@@ -42,7 +42,9 @@ class _AddCategoryState extends State<AddCategory> {
       // route to the next page
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => ManageCategories()),
+        MaterialPageRoute(
+          builder: (context) => ManageCategories(),
+        ),
       );
     }
   }

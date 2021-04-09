@@ -3,10 +3,12 @@ import 'dart:convert';
 import 'package:WIBI/admin/account_page.dart/accountpage.dart';
 //import 'package:WIBI/admin/account_page.dart/remove_account/remove_account_design.dart';
 import 'package:WIBI/admin/product_page.dart/add_product/add_product_design.dart';
+import 'package:WIBI/admin/product_page.dart/productpage.dart';
 
 import 'package:flutter/material.dart';
 
 import 'package:http/http.dart';
+import 'package:WIBI/variables.dart';
 
 class AddProduct extends StatefulWidget {
   @override
@@ -97,10 +99,15 @@ class _AddProductState extends State<AddProduct> {
         "description": description,
         "date": "date",
         "issold": "no",
+        "email": userEmail,
       };
       print("Log");
       // print(data);
       postIntoDB(data);
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => ManageProducts()),
+      );
     }
   }
 
@@ -539,13 +546,13 @@ class _AddProductState extends State<AddProduct> {
                       color: Color(0xFF1264D1),
                       onPressed: () {
                         _validateForm();
-                        postIntoDB({
+                        /*      postIntoDB({
                           "title": myController1.text,
                           "description": myController2.text,
                           "expectedprice": myController3.text,
                           "category": _currentSelectItem,
                           "location": _currentSelectedItem,
-                        });
+                        }); */
                       },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(25.0),

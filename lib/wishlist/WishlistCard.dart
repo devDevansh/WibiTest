@@ -95,7 +95,13 @@ class _WishlistCardState extends State<WishlistCard> {
                           context: context,
                           builder: (BuildContext context) {
                             return AlertDialog(
-                              title: const Text("Confirm"),
+                              title: const Text(
+                                "Confirm",
+                                style: TextStyle(
+                                  color: Color(0xFF342E37),
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
                               content: const Text(
                                 "Are you sure you wish to delete this item?",
                                 style: TextStyle(

@@ -126,11 +126,17 @@ class _RemoveProductState extends State<RemoveProduct> {
                           context: context,
                           builder: (BuildContext context) {
                             return AlertDialog(
-                              title: const Text("Caution!"),
+                              title: const Text(
+                                "Caution!",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
                               content: const Text(
                                 "The product can't be recovered. Do you wish to proceed?",
                                 style: TextStyle(
                                   color: Color(0xFF342E37),
+                                  fontWeight: FontWeight.w600,
                                 ),
                               ),
                               actions: <Widget>[

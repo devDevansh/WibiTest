@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-//import 'package:WIBI/UserCredentials.dart';
 import 'package:WIBI/credentials/UserCredentials.dart';
 import 'package:WIBI/home/home_screen.dart';
 import 'package:WIBI/variables.dart';
@@ -9,17 +8,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart';
-//import 'LoginPage.dart';
-//import '../home_screen.dart';
-//import '../invalid_login.dart';
-import 'invalid_login.dart';
-//import './invalid_login.dart';
-//import 'home_screen.dart';
 
-//void main() => runApp(MyApp());
+import 'invalid_login.dart';
 
 class LoginScreen extends StatelessWidget {
-  // static String routeName = "/login";
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -83,7 +75,7 @@ class _GoogleSignAppState extends State<GoogleSignApp> {
         builder: (context) => new ProfileScreen(detailsUser: details),
       ),
     ); */
-    if (userDetails.email.endsWith("@gmail.com")) {
+    if (userDetails.email.endsWith("i@gmail.com")) {
       //get user details from back end
       //check for each user in the list if userDetails.email is present in the list
       var response = await get("http://10.0.2.2:8080/users");

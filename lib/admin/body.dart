@@ -21,6 +21,18 @@ class Body extends StatelessWidget {
             height: getProportionateScreenHeight(15),
           ),
           AdminMenu(
+            text: "Analytics",
+            icon: "assets/images/analytics.svg",
+            press: () {
+              Navigator.push(
+                context,
+                new MaterialPageRoute(
+                  builder: (context) => AnalyticsPage(),
+                ),
+              );
+            },
+          ),
+          /*        AdminMenu(
             text: "Manage Accounts",
             icon: "assets/images/manage accounts.svg",
             press: () {
@@ -31,7 +43,7 @@ class Body extends StatelessWidget {
                 ),
               );
             },
-          ),
+          ), */
           AdminMenu(
             text: "Manage Products",
             icon: "assets/images/manage products.svg",
@@ -57,13 +69,13 @@ class Body extends StatelessWidget {
             },
           ),
           AdminMenu(
-            text: "Analytics",
-            icon: "assets/images/analytics.svg",
+            text: "Manage Accounts",
+            icon: "assets/images/manage accounts.svg",
             press: () {
               Navigator.push(
                 context,
                 new MaterialPageRoute(
-                  builder: (context) => AnalyticsPage(),
+                  builder: (context) => ManageAccounts(),
                 ),
               );
             },

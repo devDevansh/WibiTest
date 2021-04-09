@@ -17,20 +17,7 @@ class _PersonalDetailsState extends State<PersonalDetails> {
     var jsonData = json.decode(proData.body);
     List<NewUser> users = [];
     for (var u in jsonData) {
-      // Users user = Users(
-      //   u["name"],
-      //   u["email"],
-      //   u["location"],
-      //   u["designation"],
-      //   u["contact"],
-      // );
-      // users.add(user);
       if (u["email"] == userEmail) {
-        // print(u["name"]);
-        // print(u["email"]);
-        // print(u["location"]);
-        // print(u["designation"]);
-        // print(u["contact"]);
         NewUser usr = NewUser(
           u["name"],
           u["email"],
@@ -44,7 +31,6 @@ class _PersonalDetailsState extends State<PersonalDetails> {
         globalusercontact = u["contact"];
         print("log");
         print(globaluserdesignation);
-        //n = usr;
       }
     }
     print(users.length);
@@ -71,16 +57,35 @@ class _PersonalDetailsState extends State<PersonalDetails> {
           },
         ),
         centerTitle: true,
-        title: Column(
-          children: [
-            Text(
-              "Personal Details",
-            ),
-          ],
+        title: Text(
+          "Personal Details",
         ),
         backgroundColor: Color(0xFF1264D1),
       ),
       body: Container(
+        padding: EdgeInsets.only(
+          top: 30,
+          bottom: 30,
+        ),
+        margin: EdgeInsets.only(
+          top: 200,
+          bottom: 200,
+          left: 20,
+          right: 20,
+        ),
+        decoration: BoxDecoration(
+          color: Color(0xFFF2F2F0),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.8),
+              blurRadius: 10.0,
+              offset: Offset(0.0, -4.0),
+            ),
+          ],
+          borderRadius: BorderRadius.all(
+            Radius.circular(15),
+          ),
+        ),
         child: FutureBuilder(
           future: _getProduct(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -96,12 +101,12 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                           left: getProportionateScreenWidth(35),
                           right: getProportionateScreenWidth(10),
                           top: getProportionateScreenWidth(0),
-                          bottom: getProportionateScreenWidth(10),
+                          bottom: getProportionateScreenWidth(20),
                         ),
                         child: Row(
                           children: [
                             Text(
-                              'NAME :',
+                              'Name :',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Color(0xFF546E7A),
@@ -110,7 +115,7 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                             ),
                             SizedBox(width: 7),
                             Container(
-                              width: getProportionateScreenWidth(160),
+                              width: getProportionateScreenWidth(198),
                               child: Text(
                                 userName,
                                 maxLines: 1,
@@ -130,12 +135,12 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                           left: getProportionateScreenWidth(35),
                           right: getProportionateScreenWidth(35),
                           top: getProportionateScreenWidth(0),
-                          bottom: getProportionateScreenWidth(15),
+                          bottom: getProportionateScreenWidth(20),
                         ),
                         child: Row(
                           children: [
                             Text(
-                              'EMAIL :',
+                              'Email :',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Color(0xFF546E7A),
@@ -143,14 +148,17 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                               ),
                             ),
                             SizedBox(width: 7),
-                            Text(
-                              userEmail,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xFF1264D1),
-                                fontSize: 20.0,
+                            Container(
+                              width: getProportionateScreenWidth(200),
+                              child: Text(
+                                userEmail,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xFF1264D1),
+                                  fontSize: 20.0,
+                                ),
                               ),
                             ),
                           ],
@@ -166,7 +174,7 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                         child: Row(
                           children: [
                             Text(
-                              'DESIGNATION :',
+                              'Designation :',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Color(0xFF546E7A),
@@ -175,10 +183,10 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                             ),
                             SizedBox(width: 7),
                             Container(
-                              width: getProportionateScreenWidth(239),
+                              width: getProportionateScreenWidth(140),
                               child: Text(
                                 snapshot.data[index].designation,
-                                maxLines: 3,
+                                maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
@@ -200,7 +208,7 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                         child: Row(
                           children: [
                             Text(
-                              'LOCATION :',
+                              'Location :',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Color(0xFF546E7A),
@@ -209,10 +217,9 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                             ),
                             SizedBox(width: 7),
                             Container(
-                              width: getProportionateScreenWidth(202),
                               child: Text(
                                 snapshot.data[index].location,
-                                maxLines: 3,
+                                maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
@@ -229,12 +236,12 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                           left: getProportionateScreenWidth(35),
                           right: getProportionateScreenWidth(35),
                           top: getProportionateScreenWidth(0),
-                          bottom: getProportionateScreenWidth(20),
+                          bottom: getProportionateScreenWidth(25),
                         ),
                         child: Row(
                           children: [
                             Text(
-                              'CONTACT :',
+                              'Contact :',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Color(0xFF546E7A),
@@ -260,7 +267,21 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                 },
               );
             } else {
-              return Text("hello");
+              return SizedBox(
+                height: getProportionateScreenHeight(580),
+                child: Center(
+                  child: Text(
+                    'Loading...',
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1.5,
+                      color: Color(0xFF1264D1),
+                      fontFamily: 'Visby Round',
+                    ),
+                  ),
+                ),
+              );
             }
           },
         ),

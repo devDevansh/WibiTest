@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:WIBI/UserDetails.dart';
 import 'package:WIBI/admin/account_page.dart/accountpage.dart';
 import 'package:WIBI/admin/account_page.dart/add_account/add_account_design.dart';
-import 'package:WIBI/home/home_screen.dart';
 
 //import '../home_screen.dart';
 //import './home_screen.dart';
@@ -78,7 +77,7 @@ class _AddAccountState extends State<AddAccount> {
       // route to the next page
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => HomeScreen()),
+        MaterialPageRoute(builder: (context) => ManageAccounts()),
       );
     }
   }

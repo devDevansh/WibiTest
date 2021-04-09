@@ -114,7 +114,13 @@ class _RemoveCategoryState extends State<RemoveCategory> {
                           context: context,
                           builder: (BuildContext context) {
                             return AlertDialog(
-                              title: const Text("Caution!"),
+                              title: const Text(
+                                "Caution!",
+                                style: TextStyle(
+                                  color: Color(0xFF342E37),
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
                               content: const Text(
                                 "The category can't be recovered. Do you wish to proceed?",
                                 style: TextStyle(

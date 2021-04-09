@@ -1,41 +1,47 @@
-import 'dart:async';
 import 'package:WIBI/components/size_config.dart';
 import 'package:WIBI/details/components/ProductClass.dart';
-import 'package:WIBI/filters/filterspage.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:WIBI/filters/categorypage.dart';
+
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
+
+import 'dart:async';
+import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class SingleCategory extends StatefulWidget {
-  SingleCategory({Key key, this.title}) : super(key: key);
-  final String title;
+  final double width, aspectRatio;
+  final String category;
+
+  const SingleCategory({
+    this.width = 250,
+    this.aspectRatio = 1.02,
+    this.category,
+  });
+
   @override
   _SingleCategoryState createState() => _SingleCategoryState();
 }
 
 class _SingleCategoryState extends State<SingleCategory> {
-  Future<List<Product>> _getProducts() async {
-    var productData = await get("http://10.0.2.2:8080/products/books");
-    var jsonData = jsonDecode(productData.body);
-
-    List<Product> products = [];
-
-    for (var u in jsonData) {
-      Product p = new Product(
-        u["id"],
-        u["title"],
-        u["category"],
-        u["location"],
-        u["image"],
-        u["price"],
-        u["description"],
-        u["date"],
-      );
-      products.add(p);
+  Future<List<NewProduct>> _getProduct() async {
+    var proData = await http.get("http://10.0.2.2:8080/products");
+    var jsonData = json.decode(proData.body);
+    List<NewProduct> products = [];
+    for (var p in jsonData) {
+      if (p["category"] == widget.category) {
+        NewProduct prod = NewProduct(
+          p["id"],
+          p["title"],
+          p["category"],
+          p["location"],
+          p["image"],
+          p["price"],
+          p["description"],
+          p["email"],
+        );
+        products.add(prod);
+      }
     }
-
-    print("printing the length here ");
     print(products.length);
     return products;
   }
@@ -51,26 +57,30 @@ class _SingleCategoryState extends State<SingleCategory> {
             color: Colors.white,
           ),
           onPressed: () {
-            Navigator.push(context,
-                new MaterialPageRoute(builder: (context) => FilterPage()));
+            Navigator.push(
+              context,
+              new MaterialPageRoute(
+                builder: (context) => CategoryPage(),
+              ),
+            );
           },
         ),
         centerTitle: true,
         title: Text(
-          "Sorted by Category",
+          widget.category,
         ),
         backgroundColor: Color(0xFF1264D1),
       ),
       body: Container(
         child: FutureBuilder(
-          future: _getProducts(),
+          future: _getProduct(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.data == null) {
               return SizedBox(
                 height: getProportionateScreenHeight(580),
                 child: Center(
                   child: Text(
-                    'Loading...',
+                    'Posts are Empty!',
                     style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
@@ -88,7 +98,7 @@ class _SingleCategoryState extends State<SingleCategory> {
                   left: getProportionateScreenWidth(10),
                   right: getProportionateScreenWidth(10),
                 ),
-                child: new GridView.builder(
+                child: GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     childAspectRatio: 0.68,
@@ -96,7 +106,7 @@ class _SingleCategoryState extends State<SingleCategory> {
                     mainAxisSpacing: 0,
                   ),
                   itemCount: snapshot.data.length,
-                  itemBuilder: (context, index) {
+                  itemBuilder: (BuildContext context, int index) {
                     return Container(
                       child: GestureDetector(
                         onTap: () {
@@ -130,11 +140,7 @@ class _SingleCategoryState extends State<SingleCategory> {
                                 ),
                                 child: Hero(
                                   tag: snapshot.data[index].id,
-                                  child:
-                                      /* Image.network(
-                                    snapshot.data[index].image,
-                                  ), */
-                                      FadeInImage.assetNetwork(
+                                  child: FadeInImage.assetNetwork(
                                     placeholder: 'assets/images/loading.gif',
                                     image: snapshot.data[index].image,
                                   ),
@@ -143,7 +149,7 @@ class _SingleCategoryState extends State<SingleCategory> {
                             ),
                             const SizedBox(height: 10),
                             Container(
-                              width: getProportionateScreenWidth(150),
+                              width: getProportionateScreenWidth(110),
                               child: Text(
                                 snapshot.data[index].title,
                                 style: TextStyle(
@@ -184,9 +190,10 @@ class Product {
   final String category;
   final String location;
   final String image;
+
   final int price;
   final String description;
-  final String date;
+  final String email;
 
   Product(
     this.id,
@@ -196,6 +203,29 @@ class Product {
     this.image,
     this.price,
     this.description,
-    this.date,
+    this.email,
+  );
+}
+
+class NewProduct {
+  final String id;
+  final String title;
+  final String category;
+  final String location;
+  final String image;
+
+  final int price;
+  final String description;
+  final String email;
+
+  NewProduct(
+    this.id,
+    this.title,
+    this.category,
+    this.location,
+    this.image,
+    this.price,
+    this.description,
+    this.email,
   );
 }

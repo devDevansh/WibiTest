@@ -1,10 +1,6 @@
 import 'package:WIBI/components/size_config.dart';
 import 'package:WIBI/variables.dart';
-//import 'package:WIBI/variables.dart';
-//import 'package:WIBI/details/components/ProductClass.dart';
-//import 'package:WIBI/wishlist/WishlistClass.dart';
-//import 'package:WIBI/wishlist/components/WishlistClass.dart';
-//import 'dart:async';
+
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -12,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'product_description.dart';
-//import 'package:like_button/like_button.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Body extends StatefulWidget {
   final String id;
@@ -38,6 +34,36 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
+  Future<void> _launched;
+
+  String _launchUrl = 'https://wibi-group.slack.com';
+
+  Future<void> _launchInBrowser(String url) async {
+    if (await canLaunch(url)) {
+      await launch(
+        url,
+        forceSafariVC: false,
+        forceWebView: false,
+        headers: <String, String>{'header_key': 'header_value'},
+      );
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  Future<void> _launchInApp(String url) async {
+    if (await canLaunch(url)) {
+      await launch(
+        url,
+        forceSafariVC: true,
+        forceWebView: false,
+        headers: <String, String>{'header_key': 'header_value'},
+      );
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   postProduct(String id, String title, String category, String location,
       String image, int price, String description) async {
     //print(ts);
@@ -192,7 +218,11 @@ class _BodyState extends State<Body> {
                                 width: 28.5,
                                 height: 28.5,
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                setState(() {
+                                  _launched = _launchInApp(_launchUrl);
+                                });
+                              },
                             ),
                           ],
                         ),

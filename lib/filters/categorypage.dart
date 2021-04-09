@@ -51,8 +51,12 @@ class _CategoryPageState extends State<CategoryPage> {
             color: Colors.white,
           ),
           onPressed: () {
-            Navigator.push(context,
-                new MaterialPageRoute(builder: (context) => FilterPage()));
+            Navigator.push(
+              context,
+              new MaterialPageRoute(
+                builder: (context) => FilterPage(),
+              ),
+            );
           },
         ),
         centerTitle: true,
@@ -107,9 +111,12 @@ class _CategoryPageState extends State<CategoryPage> {
                           color: Color(0xFFF2F2F0),
                           onPressed: () {
                             Navigator.push(
-                                context,
-                                new MaterialPageRoute(
-                                    builder: (context) => SingleCategory()));
+                              context,
+                              new MaterialPageRoute(
+                                builder: (context) => SingleCategory(
+                                    category: snapshot.data[index].category),
+                              ),
+                            );
                           },
                           child: Row(
                             children: [

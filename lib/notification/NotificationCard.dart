@@ -97,6 +97,7 @@ class _NotificationCardState extends State<NotificationCard> {
                                 "Confirm",
                                 style: TextStyle(
                                   color: Color(0xFF342E37),
+                                  fontWeight: FontWeight.w600,
                                 ),
                               ),
                               content: const Text(
